@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${display_name}",
+  "description": "${description}",
+  "authors": [
+    "KitoWasHere",
+    "OmayPaty"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mods/cosmic_jewelry",
+    "sources": "https://github.com/AugustoMegener/cosmic_jewelry"
+  },
+  "license": "MIT",
+  "icon": "assets/cosmic_jewelry/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.cosmic_jewelry.fabric.CosmicJewelryFabric"
+    ],
+    "client": [
+      "com.cosmic_jewelry.fabric.client.CosmicJewelryFabricClient"
+    ]
+  },
+  "mixins": [
+    "cosmic_jewelry.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.20.4",
+    "java": ">=17",
+    "architectury": ">=11.1.17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
