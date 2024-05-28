@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end":  "cosmic_jewelry:tiles/peridot",
-    "side": "cosmic_jewelry:pillar/peridot"
-  }
-}
