@@ -27,12 +27,12 @@ class LappingRecipe(val input: Ingredient, val result: ItemStack) : Recipe<Conta
     }
 
 
-    override fun assemble(pCraftingContainer: Container, pRegistries: HolderLookup.Provider): ItemStack =
-        result.copy().also { pCraftingContainer.removeItem(1, 0) }
+    override fun assemble(pCraftingContainer: Container, pRegistries: HolderLookup.Provider?): ItemStack =
+        result.copy().also { pCraftingContainer.removeItem(1, 1) }
 
     override fun canCraftInDimensions(pWidth: Int, pHeight: Int) = true
 
-    override fun getResultItem(pRegistries: HolderLookup.Provider) = result
+    override fun getResultItem(pRegistries: HolderLookup.Provider?) = result
 
     override fun getSerializer(): RecipeSerializer<LappingRecipe> = lappingRecipeSerializer
     override fun getType(): RecipeType<LappingRecipe> = lappingRecipeType
