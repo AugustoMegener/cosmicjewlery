@@ -1,10 +1,7 @@
 package com.cosmic_jewelry.client.datagen
 
-import com.cosmic_jewelry.common.registry.BlockRegistry.cutGemBlock
-import com.cosmic_jewelry.common.registry.BlockRegistry.pillarBlock
-import com.cosmic_jewelry.common.registry.BlockRegistry.tilesBlock
+import com.cosmic_jewelry.common.core.gem.feature.GemBlock
 import net.minecraft.data.PackOutput
-import net.minecraft.world.level.block.RotatedPillarBlock
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 
@@ -12,15 +9,14 @@ class GemBlockStateProvider(id: String, output: PackOutput, fileHelper: Existing
     : BlockStateProvider(output, id, fileHelper)
 {
     override fun registerStatesAndModels() {
-        cutGemBlock.allFeatures.forEach { (_, b) -> b.get().also { simpleBlockWithItem(it, cubeAll(it)) }  }
-        tilesBlock.allFeatures.forEach { (_, b) -> b.get().also { simpleBlockWithItem(it, cubeAll(it)) }  }
-        pillarBlock.allFeatures.forEach { (l, b) -> (b.get() as RotatedPillarBlock).also {
-            logBlock(it)
-            l.location.also { p -> simpleBlockItem(it,
-                models().cubeColumn(p.namespace,
-                                    p.withPrefix("block/"),
-                                    p.withPrefix("block/").withSuffix("_top")))
-            }
-        } }
+        GemBlock.register.forEach { b -> b.allGemTypes.forEach { g -> b.generateData(this, g) } }
+
+
+        /*cutGemBlock.allFeatures.forEach { it.get().also { b -> simpleBlockWithItem(b, cubeAll(b)) } }
+        tilesBlock .allFeatures.forEach { it.get().also { b -> simpleBlockWithItem(b, cubeAll(b)) } }
+        pillarBlock.allFeatures.forEach { (it.get() as RotatedPillarBlock).also { b ->
+            logBlock(b)
+            simpleBlockItem(b, models().withExistingParent(it.id.toString(), "minecraft:block/cube_column"))
+        } }*/
     }
 }

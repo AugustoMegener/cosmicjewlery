@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "cosmic_jewelry:block/rose_quartz_gem_block"
+  }
+}

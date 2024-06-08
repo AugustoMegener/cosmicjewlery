@@ -1,14 +1,32 @@
 package com.cosmic_jewelry
 
-import com.cosmic_jewelry.client.event.ModClientEvent
+import com.cosmic_jewelry.common.core.gem.GemRecipe.Companion.cutGemBlockRecipe
+import com.cosmic_jewelry.common.core.gem.GemRecipe.Companion.gemLappingRecipe
+import com.cosmic_jewelry.common.core.gem.GemRecipe.Companion.gemPillarBlockRecipe
+import com.cosmic_jewelry.common.core.gem.GemRecipe.Companion.gemTilesBlockRecipe
+import com.cosmic_jewelry.common.core.gem.GemType.Companion.amethystGem
+import com.cosmic_jewelry.common.core.gem.GemType.Companion.blueQuartzGem
+import com.cosmic_jewelry.common.core.gem.GemType.Companion.carnelianGem
+import com.cosmic_jewelry.common.core.gem.GemType.Companion.lapisLazuliGem
+import com.cosmic_jewelry.common.core.gem.GemType.Companion.orangeJasperGem
 import com.cosmic_jewelry.common.core.gem.GemType.Companion.peridotGem
+import com.cosmic_jewelry.common.core.gem.GemType.Companion.roseQuartzGem
+import com.cosmic_jewelry.common.core.gem.GemType.Companion.rubyGem
+import com.cosmic_jewelry.common.core.gem.GemType.Companion.sapphireGem
+import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.blockEntityTypes
 import com.cosmic_jewelry.common.registry.BlockRegistry.blocks
 import com.cosmic_jewelry.common.registry.BlockRegistry.cutGemBlock
+import com.cosmic_jewelry.common.registry.BlockRegistry.deepslateGemOreBlock
+import com.cosmic_jewelry.common.registry.BlockRegistry.gemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.pillarBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.tilesBlock
 import com.cosmic_jewelry.common.registry.GemTypeRegister
 import com.cosmic_jewelry.common.registry.ItemRegistry.cutGemItem
 import com.cosmic_jewelry.common.registry.ItemRegistry.items
+import com.cosmic_jewelry.common.registry.ItemRegistry.rawGemItem
+import com.cosmic_jewelry.common.registry.MenuTypeRegistry.menuTypes
+import com.cosmic_jewelry.common.registry.RecipeRegistry.recipeSerializers
+import com.cosmic_jewelry.common.registry.RecipeRegistry.recipeTypes
 import com.cosmic_jewelry.common.registry.TabRegistry.tabs
 import net.neoforged.fml.common.Mod
 import org.apache.logging.log4j.LogManager
@@ -22,18 +40,39 @@ object CosmicJewelry {
     val logger: Logger = LogManager.getLogger(ID)
 
     init {
-        MOD_BUS.addListener(ModClientEvent::onGatherData)
         registerGem()
-        listOf(blocks, items, tabs).forEach { it.register(MOD_BUS) }
+        listOf(blocks, items, tabs, blockEntityTypes, menuTypes, recipeTypes, recipeSerializers)
+            .forEach { it.register(MOD_BUS) }
     }
 
     private fun registerGem() {
-        with (GemTypeRegister) {
-            register(ID,
-                "peridot" to peridotGem
-            ) {
-                feature(items, cutGemItem, cutGemBlock.item, tilesBlock.item, pillarBlock.item,)
-                feature(blocks, cutGemBlock, tilesBlock, pillarBlock)
+        GemTypeRegister(ID) {
+            register("peridot"       to peridotGem,
+                             "amethyst"      to amethystGem,
+                             "blue_quartz"   to blueQuartzGem,
+                             "carnelian"     to carnelianGem,
+                             "lapis_lazuli"  to lapisLazuliGem,
+                             "orange_jasper" to orangeJasperGem,
+                             "rose_quartz"   to roseQuartzGem,
+                             "ruby"          to rubyGem,
+                             "sapphire"      to sapphireGem     )
+            {
+                blockFeature(blocks, items,
+                    cutGemBlock, tilesBlock, pillarBlock)
+
+                recipe(gemPillarBlockRecipe, gemTilesBlockRecipe)
+            }
+
+            register("peridot" to peridotGem) {
+                blockFeature(blocks, items, deepslateGemOreBlock)
+                feature(items, rawGemItem, cutGemItem)
+                recipe(cutGemBlockRecipe, gemLappingRecipe)
+            }
+
+            register("ruby"     to rubyGem,
+                             "sapphire" to sapphireGem) {
+                blockFeature(blocks, items, gemOreBlock)
+                feature(items, rawGemItem)
             }
         }
     }
