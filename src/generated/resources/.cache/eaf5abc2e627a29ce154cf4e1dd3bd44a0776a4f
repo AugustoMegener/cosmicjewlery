@@ -1,5 +1,13 @@
-// 1.20.6	2024-06-04T19:19:16.061836	Item Models: cosmic_jewelry
+// 1.20.6	2024-06-11T20:27:20.7061941	Item Models: cosmic_jewelry
+e9615584e38c055890402c237b19f18e32d693da assets/cosmic_jewelry/models/item/amethyst_gem.json
+b7219cf4ececf7bd3710c123d25ae2a70d2d15a2 assets/cosmic_jewelry/models/item/blue_quartz_gem.json
+73edd66d3de871149431cc7d4c653481e376a60c assets/cosmic_jewelry/models/item/carnelian_gem.json
+87fb0c0a2ddcd1cd16a7239d400b116586f49c87 assets/cosmic_jewelry/models/item/lapis_lazuli_gem.json
+410cafa4eb6ca2af2539c5c8ec5295c9e027455d assets/cosmic_jewelry/models/item/orange_jasper_gem.json
 08560206628f1875324b3c86f45080316745cd51 assets/cosmic_jewelry/models/item/peridot_gem.json
 5621dd8e715442d5cf899cd0854f85382cc0a509 assets/cosmic_jewelry/models/item/peridot_uncut_gem.json
+b55354313e869cd3db159bbedb8508ed14ebf2c4 assets/cosmic_jewelry/models/item/rose_quartz_gem.json
+1fc98064d0ef0a08ba8136a7c60cb29083f3c95b assets/cosmic_jewelry/models/item/ruby_gem.json
 a6a84782308f48ec0205c06b0a0e58082be8244e assets/cosmic_jewelry/models/item/ruby_uncut_gem.json
+b7dba885f641f8f7a3c5fe5ab49b1d5828083034 assets/cosmic_jewelry/models/item/sapphire_gem.json
 8e67c0c5c8eb65d5b9a66a6fd8729ff92558f518 assets/cosmic_jewelry/models/item/sapphire_uncut_gem.json

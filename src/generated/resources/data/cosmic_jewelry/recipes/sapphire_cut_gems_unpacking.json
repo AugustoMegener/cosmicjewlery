@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cosmic_jewelry:sapphire_gem_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "cosmic_jewelry:sapphire_gem"
+  }
+}

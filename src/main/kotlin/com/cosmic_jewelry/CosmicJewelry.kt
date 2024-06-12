@@ -58,21 +58,26 @@ object CosmicJewelry {
                              "sapphire"      to sapphireGem     )
             {
                 blockFeature(blocks, items,
-                    cutGemBlock, tilesBlock, pillarBlock)
-
-                recipe(gemPillarBlockRecipe, gemTilesBlockRecipe)
+                             cutGemBlock, tilesBlock, pillarBlock)
+                feature(items, cutGemItem)
+                recipe(cutGemBlockRecipe, gemPillarBlockRecipe, gemTilesBlockRecipe)
             }
 
             register("peridot" to peridotGem) {
                 blockFeature(blocks, items, deepslateGemOreBlock)
-                feature(items, rawGemItem, cutGemItem)
-                recipe(cutGemBlockRecipe, gemLappingRecipe)
             }
 
             register("ruby"     to rubyGem,
                              "sapphire" to sapphireGem) {
                 blockFeature(blocks, items, gemOreBlock)
+            }
+
+            register("ruby"     to rubyGem,
+                             "sapphire" to sapphireGem,
+                             "peridot"  to peridotGem) {
+                blockFeature(blocks, items)
                 feature(items, rawGemItem)
+                recipe(gemLappingRecipe)
             }
         }
     }

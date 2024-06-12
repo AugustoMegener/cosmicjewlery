@@ -4,7 +4,7 @@ package com.cosmic_jewelry.common.registry
 
 import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.gem.GemType.Companion.peridotGem
-import com.cosmic_jewelry.common.core.gem.feature.GemItem
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemItem
 import com.cosmic_jewelry.common.registry.ItemRegistry.cutGemItem
 import com.cosmic_jewelry.common.registry.ItemRegistry.lappingTableBlockItem
 import net.minecraft.core.registries.Registries
@@ -20,7 +20,7 @@ object TabRegistry {
         .title(Component.translatable("category.$ID.gem"))
         .icon { cutGemItem[peridotGem]!!.defaultInstance }
         .displayItems { _, o ->
-            GemItem.register.flatMap { it.featuresMap.values } .map { it.get() } .forEach(o::accept)
+            RegistryGemItem.register.flatMap { it.featuresMap.values } .map { it.get() } .forEach(o::accept)
             o.accept(lappingTableBlockItem)
         }
         .build()

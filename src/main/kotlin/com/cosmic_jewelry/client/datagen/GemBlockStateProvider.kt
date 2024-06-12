@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.client.datagen
 
-import com.cosmic_jewelry.common.core.gem.feature.GemBlock
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemBlock
 import net.minecraft.data.PackOutput
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
@@ -9,7 +9,7 @@ class GemBlockStateProvider(id: String, output: PackOutput, fileHelper: Existing
     : BlockStateProvider(output, id, fileHelper)
 {
     override fun registerStatesAndModels() {
-        GemBlock.register.forEach { b -> b.allGemTypes.forEach { g -> b.generateData(this, g) } }
+        RegistryGemBlock.register.forEach { b -> b.allGemTypes.forEach { g -> b.generateData(this, g) } }
 
 
         /*cutGemBlock.allFeatures.forEach { it.get().also { b -> simpleBlockWithItem(b, cubeAll(b)) } }

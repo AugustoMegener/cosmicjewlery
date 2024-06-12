@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component
 import net.neoforged.neoforge.registries.DeferredHolder
 import net.neoforged.neoforge.registries.DeferredRegister
 
-open class GemFeature<T>(private val suffix: String, protected val builder: (GemType) -> T) {
+open class RegistryGemFeature<T>(private val suffix: String, protected val builder: (GemType) -> T) {
 
     private val features = HashMap<GemType, DeferredHolder<T, out T>>()
 

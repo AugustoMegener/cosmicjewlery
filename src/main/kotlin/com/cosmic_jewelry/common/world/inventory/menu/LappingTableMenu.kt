@@ -1,47 +1,57 @@
 package com.cosmic_jewelry.common.world.inventory.menu
 
-import com.cosmic_jewelry.common.core.gem.feature.GemItem.Companion.cutterMohs
-import com.cosmic_jewelry.common.core.gem.feature.GemItem.Companion.isCutter
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemItem.Companion.cutterMohs
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemItem.Companion.isCutter
 import com.cosmic_jewelry.common.registry.BlockRegistry.lappingTableBlock
 import com.cosmic_jewelry.common.registry.MenuTypeRegistry.lappingTableMenu
-import com.cosmic_jewelry.common.registry.RecipeRegistry
-import com.cosmic_jewelry.common.registry.RecipeRegistry.lappingRecipeType
 import com.cosmic_jewelry.common.world.level.block.entity.LappingTableBlockEntity
 import net.minecraft.network.RegistryFriendlyByteBuf
-import net.minecraft.world.Container
-import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerLevelAccess
-import net.minecraft.world.inventory.CraftingMenu
-import net.minecraft.world.inventory.FurnaceMenu
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
-import net.neoforged.neoforge.items.IItemHandler
+import net.minecraft.world.level.Level
 import net.neoforged.neoforge.items.SlotItemHandler
 
 class LappingTableMenu(containerId: Int, playerInventory: Inventory, val blockEntity: LappingTableBlockEntity)
 : AbstractContainerMenu(lappingTableMenu, containerId)
 {
-    val level     = playerInventory.player.level()
+    val level: Level = playerInventory.player.level()
+    val levelAccess: ContainerLevelAccess = ContainerLevelAccess.create(level, blockEntity.blockPos)
     val inventory = blockEntity.inventory
 
-    val cutterSlot =
-    object : SlotItemHandler(inventory, 0,  37,  34) {
-        override fun mayPlace(stack: ItemStack) = super.mayPlace(stack) && stack.isCutter
+    private val recipes = level.recipeManager
+
+
+    val cutterInputSlot: SlotItemHandler =
+    object : SlotItemHandler(inventory, 0,  38,  35) {
+        override fun mayPlace(stack: ItemStack) =
+            super.mayPlace(stack) && stack.isCutter && !cutterOutputSlot.hasItem() && gemInputSlot.hasItem() &&
+                                     stack.cutterMohs!! >= gemInputSlot.item.cutterMohs!!
+
+        override fun isHighlightable() = !cutterOutputSlot.hasItem() && gemInputSlot.hasItem()
+        override fun getMaxStackSize() = 1
     }
 
-    val inputSlot =
-    object : SlotItemHandler(inventory, 1,  55,  52) {}
-
-    val outputSlot =
-    object : SlotItemHandler(inventory, 2, 116, 35) {
-        override fun mayPickup(playerIn: Player) = false
-
-        override fun setChanged() { outputSlotChanged()
-                                    super.setChanged()    }
+    val gemInputSlot: SlotItemHandler =
+    object : SlotItemHandler(inventory, 1,  56,  53) {
+        override fun mayPlace(stack: ItemStack) = stack.isCutter
     }
+
+    val cutterOutputSlot: SlotItemHandler =
+    object : SlotItemHandler(inventory, 2, 38, 53) {
+        override fun mayPlace(pStack: ItemStack) = false
+        override fun isHighlightable() = !cutterInputSlot.hasItem() && hasItem()
+        override fun getMaxStackSize() = 1
+    }
+
+    val gemOutputSlot: SlotItemHandler =
+    object : SlotItemHandler(inventory, 3, 116, 35) {
+        override fun mayPlace(pStack: ItemStack) = false
+    }
+
 
 
     constructor(containerId: Int, inv: Inventory, buf: RegistryFriendlyByteBuf)
@@ -53,20 +63,29 @@ class LappingTableMenu(containerId: Int, playerInventory: Inventory, val blockEn
 
         repeat(9) { addSlot(Slot(playerInventory, it, 8 + it * 18, 142)) }
 
-        arrayOf(cutterSlot, inputSlot, outputSlot).forEach(::addSlot)
+        arrayOf(cutterInputSlot, gemInputSlot, cutterOutputSlot, gemOutputSlot).forEach(::addSlot)
     }
 
-    override fun quickMoveStack(pPlayer: Player, pIndex: Int): ItemStack { TODO() }
+    override fun quickMoveStack(player: Player, index: Int): ItemStack {
+        val sourceSlot = slots[index]
+        val sourceStack = sourceSlot.item.takeIf { !it.isEmpty } ?: return ItemStack.EMPTY
+        val copyOfSourceStack = sourceStack.copy()
 
-    override fun stillValid(pPlayer: Player) = stillValid(level as ContainerLevelAccess, pPlayer, lappingTableBlock)
+        val (start, end) = when (index) {
+            in 0..1 -> 2 to 4
+            in 2..3 -> 0 to 2
+            else -> 0 to 4
+        }
 
-    private fun outputSlotChanged() {
-        TODO("Not yet implemented")
+        if (!moveItemStackTo(sourceStack, start, end, false)) return ItemStack.EMPTY
+
+        if (sourceStack.isEmpty) sourceSlot.set(ItemStack.EMPTY)
+        else sourceSlot.setChanged()
+
+        return if (sourceStack.count == copyOfSourceStack.count)  ItemStack.EMPTY
+               else copyOfSourceStack.also { sourceSlot.onTake(player, sourceStack) }
     }
 
-    companion object {
-        val slotCords = listOf(37  to 34 /* Cutter */,
-                               55  to 52 /* Input  */,
-                               116 to 35 /* Output */).withIndex()
-    }
+
+    override fun stillValid(pPlayer: Player) = stillValid(levelAccess, pPlayer, lappingTableBlock)
 }

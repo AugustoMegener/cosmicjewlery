@@ -1,0 +1,10 @@
+{
+  "type": "cosmic_jewelry:lapping",
+  "input": {
+    "item": "cosmic_jewelry:sapphire_uncut_gem"
+  },
+  "output": {
+    "count": 1,
+    "id": "cosmic_jewelry:sapphire_gem"
+  }
+}

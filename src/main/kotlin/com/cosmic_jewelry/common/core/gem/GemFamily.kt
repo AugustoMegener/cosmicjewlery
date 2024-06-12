@@ -1,8 +1,8 @@
 package com.cosmic_jewelry.common.core.gem
 
-import com.cosmic_jewelry.common.core.gem.feature.GemOre.Companion.MiningLevel
-import com.cosmic_jewelry.common.core.gem.feature.GemOre.Companion.MiningLevel.Companion.ironLevel
-import com.cosmic_jewelry.common.core.gem.feature.GemOre.Companion.MiningLevel.Companion.stoneLevel
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemOre.Companion.MiningLevel
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemOre.Companion.MiningLevel.Companion.ironLevel
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemOre.Companion.MiningLevel.Companion.stoneLevel
 import net.minecraft.world.item.Rarity
 
 class GemFamily(val defaultMosh: Float, val defaultRarity: Rarity, builder: GemFamilyBuilder.() -> Unit) {

@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.common.datagen
 
-import com.cosmic_jewelry.common.core.gem.feature.GemOre
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemOre
 import com.cosmic_jewelry.common.registry.ItemRegistry.rawGemItem
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
@@ -21,12 +21,12 @@ class GemLootTableProvider(pOutput: PackOutput,
         val gemOreGenProvider = object : BlockLootSubProvider(setOf(), FeatureFlags.REGISTRY.allFlags())
         {
             override fun generate() {
-                GemOre.register.flatMap { it.featuresMap.entries } .forEach { (g, b) ->
+                RegistryGemOre.register.flatMap { it.featuresMap.entries } .forEach { (g, b) ->
                     b.get().also { add(it, createOreDrop(it, rawGemItem[g]!!)) }
                 }
             }
 
-            override fun getKnownBlocks() = GemOre.register.flatMap { it.allFeatures } .map { it.get() }.toMutableList()
+            override fun getKnownBlocks() = RegistryGemOre.register.flatMap { it.allFeatures } .map { it.get() }.toMutableList()
         }
     }
 }

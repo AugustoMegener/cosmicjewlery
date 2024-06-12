@@ -11,18 +11,18 @@ import net.minecraft.world.level.block.DropExperienceBlock
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 
-class GemOre(
+class RegistryGemOre(
     suffix: String,
     miningTime: (Float) -> Float = { (it + 3f) / 2 },
     dataGen: BlockStateProvider.(GemType, Block) -> Unit = { _, b -> simpleBlockWithItem(b, cubeAll(b)) },
-) : GemBlock(suffix,
+) : RegistryGemBlock(suffix,
              dataGen,
              { DropExperienceBlock(ConstantInt.of((0)), Properties.of().strength(miningTime(it.mosh), (3f))
                                                                        .requiresCorrectToolForDrops()) } )
 {
     init { all += this; Blocks.IRON_ORE }
 
-    companion object : ClassRegister<GemOre>() {
+    companion object : ClassRegister<RegistryGemOre>() {
 
         @JvmInline value class MiningLevel(val tag: TagKey<Block>) {
             companion object {

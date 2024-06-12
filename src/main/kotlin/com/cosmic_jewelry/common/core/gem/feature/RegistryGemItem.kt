@@ -7,11 +7,11 @@ import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider
 import net.neoforged.neoforge.registries.DeferredHolder
 
-open class GemItem(suffix: String,
-                   val doLapping: Boolean = false,
-                   dataGen: ItemModelProvider.(GemType, Item) -> Unit = { _, i -> basicItem(i) },
-                   builder: (GemType) -> Item)
-: DataGenGemFeature<Item, ItemModelProvider>(suffix, dataGen, builder)
+open class RegistryGemItem(suffix: String,
+                           val doLapping: Boolean = false,
+                           dataGen: ItemModelProvider.(GemType, Item) -> Unit = { _, i -> basicItem(i) },
+                           builder: (GemType) -> Item)
+: DataGenRegistryGemFeature<Item, ItemModelProvider>(suffix, dataGen, builder)
 {
     constructor(suffix: String,
                 dataGen: ItemModelProvider.(GemType, Item) -> Unit = { _, i -> basicItem(i) },
@@ -20,22 +20,22 @@ open class GemItem(suffix: String,
     init { all += this }
 
     override fun registerPost(gemType: GemType, name: String, feature: DeferredHolder<Item, out Item>) {
-        cuttersRegisters[feature] = Pair(doLapping, gemType.mosh)
+        if (doLapping) cuttersRegisters[feature] = gemType.mosh
     }
 
-    companion object : ClassRegister<GemItem>() {
+    companion object : ClassRegister<RegistryGemItem>() {
         val defaultProperty = { it: GemType -> Item.Properties().rarity(it.rarity) }
 
-        private val cuttersRegisters = HashMap<DeferredHolder<Item, out Item>, Pair<Boolean, Float>>()
-        val cuttersMap by lazy { cuttersRegisters.mapKeys { it.key.get() } }
+        private val cuttersRegisters = HashMap<DeferredHolder<Item, out Item>, Float>()
+        val cuttersMohsMap by lazy { cuttersRegisters.mapKeys { it.key.get() } }
 
-        val Item.isCutter get() = cuttersMap[this]?.first == null
+        val Item.isCutter get() = this in cuttersMohsMap.keys
         val ItemStack.isCutter get() = item.isCutter
 
         /**
         * Returns the mohs value if the item is a cutter, else, return null.
          */
-        val Item.cutterMohs: Float? get() = if (isCutter) cuttersMap[this]?.second else null
+        val Item.cutterMohs: Float? get() = cuttersMohsMap[this]
         val ItemStack.cutterMohs: Float? get() = this.item.cutterMohs
     }
 }

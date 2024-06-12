@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.common.datagen
 
-import com.cosmic_jewelry.common.core.gem.feature.GemOre
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemOre
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.PackOutput
@@ -17,7 +17,7 @@ class GemTagProvider(id: String,
     : TagsProvider<Block>(packOutput, Registries.BLOCK, registries, id, existingFileHelper)
 {
     override fun addTags(pProvider: HolderLookup.Provider) {
-        GemOre.register.flatMap { it.featuresMap.entries }.map { it.key to it.value.key }.forEach { (g, b) ->
+        RegistryGemOre.register.flatMap { it.featuresMap.entries }.map { it.key to it.value.key }.forEach { (g, b) ->
             tag(BlockTags.MINEABLE_WITH_PICKAXE).add(b)
             tag(g.family.miningLevel.tag).add(b)
         }

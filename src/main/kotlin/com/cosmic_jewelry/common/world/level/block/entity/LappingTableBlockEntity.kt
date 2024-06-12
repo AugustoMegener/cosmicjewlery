@@ -1,62 +1,65 @@
 package com.cosmic_jewelry.common.world.level.block.entity
 
 import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.common.core.gem.feature.GemItem.Companion.cutterMohs
 import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.lappingTableBlockEntityType
 import com.cosmic_jewelry.common.registry.RecipeRegistry.lappingRecipeType
+import com.cosmic_jewelry.common.util.NeoForgeUtil.container
 import com.cosmic_jewelry.common.world.inventory.menu.LappingTableMenu
 import net.minecraft.core.BlockPos
-import net.minecraft.core.NonNullList
-import net.minecraft.core.registries.Registries
+import net.minecraft.core.HolderLookup
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.world.SimpleContainer
+import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.items.ItemStackHandler
 import kotlin.jvm.optionals.getOrNull
 
 class LappingTableBlockEntity(pPos: BlockPos, pBlockState: BlockState)
-: BaseContainerBlockEntity(lappingTableBlockEntityType, pPos, pBlockState) {
+: BlockEntity(lappingTableBlockEntityType, pPos, pBlockState), MenuProvider {
 
-    private val recipeManager by lazy { level!!.recipeManager }
+    private val blockLevel by lazy { level!! }
+    private val recipeManager by lazy { blockLevel.recipeManager }
 
-    val inventory = object : ItemStackHandler(3) {
+    val actualRecipe get() = recipeManager.getRecipeFor(lappingRecipeType, inventory.container, blockLevel).getOrNull()
 
-        val container get() = object : SimpleContainer(*items.toTypedArray()) {
-            val recipe = recipeManager.getRecipeFor(lappingRecipeType, this, level!!).getOrNull()
-        }
+    val inventory: ItemStackHandler = object : ItemStackHandler(4) {
 
-        override fun onContentsChanged(slot: Int) { when (slot) { 0, 1 -> recipeSlotChanged()
-                                                                     2 -> outputSlotChanged() } }
+        override fun getSlotLimit(slot: Int) = if (slot == 0 || slot == 2) 1 else super.getSlotLimit(slot)
 
-        private fun outputSlotChanged() {
-            with(container) {
-                if (recipe != null && getStackInSlot(2).isEmpty) {
-                    removeItem(1, 1)
-                }
-            }
-        }
+        override fun onContentsChanged(slot: Int) {
+            this@LappingTableBlockEntity.setChanged()
 
-        private fun recipeSlotChanged() {
-            with(container) {
-                setStackInSlot(2, recipe?.value?.result ?: ItemStack.EMPTY)
+            if (slot == 2 || slot == 3) return
+
+            actualRecipe?.run {
+                if (getStackInSlot(3).takeIf { !it.isEmpty }?.let { !it.`is`(value.result.item) } == true ||
+                    extractItem(0, 1, true).takeIf { it != ItemStack.EMPTY }
+                        ?.run { insertItem(2, this, true) == ItemStack.EMPTY } == false) return@run
+
+                insertItem(3, value.assemble(container, null), false)
+                insertItem(2, extractItem(0, 1, false), false)
+
             }
         }
     }
 
-    override fun getContainerSize() = 3
-
-    override fun createMenu(pContainerId: Int, pInventory: Inventory) =
-        LappingTableMenu(pContainerId, pInventory, this)
-
-    override fun getDefaultName(): Component = Component.translatable("container.$ID.lapping_table")
-
-    override fun getItems(): NonNullList<ItemStack> =
-        NonNullList.copyOf((0..inventory.slots).map { inventory.getStackInSlot(it) } )
-
-    override fun setItems(pItems: NonNullList<ItemStack>) {
-        pItems.withIndex().forEach { inventory.setStackInSlot(it.index, it.value) }
+    override fun saveAdditional(pTag: CompoundTag, pRegistries: HolderLookup.Provider) {
+        pTag.put("inventory", inventory.serializeNBT(pRegistries))
+        super.saveAdditional(pTag, pRegistries)
     }
+
+    override fun loadAdditional(pTag: CompoundTag, pRegistries: HolderLookup.Provider) {
+        inventory.deserializeNBT(pRegistries, pTag.getCompound("inventory"))
+        super.loadAdditional(pTag, pRegistries)
+    }
+
+
+    override fun createMenu(pContainerId: Int, pPlayerInventory: Inventory, pPlayer: Player) =
+        LappingTableMenu(pContainerId, pPlayerInventory, this)
+
+    override fun getDisplayName(): Component = Component.translatable("container.$ID.lapping_table")
 }

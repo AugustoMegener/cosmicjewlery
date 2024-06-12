@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.common.world.item.crafting
 
-import com.cosmic_jewelry.common.core.gem.feature.GemItem.Companion.cutterMohs
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemItem.Companion.cutterMohs
 import com.cosmic_jewelry.common.registry.RecipeRegistry.lappingRecipeSerializer
 import com.cosmic_jewelry.common.registry.RecipeRegistry.lappingRecipeType
 import com.mojang.serialization.MapCodec

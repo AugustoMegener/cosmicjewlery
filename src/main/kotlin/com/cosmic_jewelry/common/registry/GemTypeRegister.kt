@@ -2,8 +2,8 @@ package com.cosmic_jewelry.common.registry
 
 import com.cosmic_jewelry.common.core.gem.GemType
 import com.cosmic_jewelry.common.core.gem.GemType.Companion.gemTypes
-import com.cosmic_jewelry.common.core.gem.feature.GemBlock
-import com.cosmic_jewelry.common.core.gem.feature.GemFeature
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemBlock
+import com.cosmic_jewelry.common.core.gem.feature.RegistryGemFeature
 import com.cosmic_jewelry.common.core.gem.GemRecipe
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
@@ -25,13 +25,13 @@ object GemTypeRegister {
                                               private val id:      String,
                                               private val name:    String  )
     {
-        fun <T> feature(register: DeferredRegister<T>, vararg gemFeature: GemFeature<T>) {
-            gemFeature.forEach { it.register(gemType, name, register)  }
+        fun <T> feature(register: DeferredRegister<T>, vararg registryGemFeature: RegistryGemFeature<T>) {
+            registryGemFeature.forEach { it.register(gemType, name, register)  }
         }
 
         fun blockFeature(registerBlock: DeferredRegister<Block>,
                          registerItem:  DeferredRegister<Item>,
-                         vararg gemFeature: GemBlock)
+                         vararg gemFeature: RegistryGemBlock)
         { feature(registerBlock, *gemFeature)
           feature(registerItem, *gemFeature.map { it.item }.toTypedArray()) }
 
