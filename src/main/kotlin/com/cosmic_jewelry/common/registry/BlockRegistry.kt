@@ -3,6 +3,7 @@ package com.cosmic_jewelry.common.registry
 import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.feature.gem.GemBlock
 import com.cosmic_jewelry.common.core.material.feature.gem.GemOre
+import com.cosmic_jewelry.common.util.MinecraftUtil.has
 import com.cosmic_jewelry.common.world.level.block.LappingTableBlock
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.block.Block
@@ -25,7 +26,9 @@ object BlockRegistry {
     val gemOreBlock = GemOre("#_ore")
     val deepslateGemOreBlock = GemOre("deepstale_#_ore") { it -> (it + 4.5f) / 2 }
 
-    val cutGemBlock = GemBlock("#_gem_block") { Block(Properties.of().strength(it.mosh)) }
+    val cutGemBlock = GemBlock(ID has "#_gem_block")  {
+        build {  }
+    }
     val tilesBlock  = GemBlock("#_tiles") { Block(Properties.of().strength(it.mosh)) }
     val pillarBlock = GemBlock("#_pillar", { _, b -> (b as RotatedPillarBlock)
         logBlock(b)

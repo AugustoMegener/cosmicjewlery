@@ -1,42 +1,48 @@
 package com.cosmic_jewelry.common.core.material.feature.gem
 
-import com.cosmic_jewelry.common.util.ClassRegister
+import com.cosmic_jewelry.common.core.material.feature.MaterialItem
 import com.cosmic_jewelry.common.core.material.gem.GemType
-import com.cosmic_jewelry.common.core.material.feature.DataGenFeature
+import com.cosmic_jewelry.common.util.ClassRegister
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider
 import net.neoforged.neoforge.registries.DeferredRegister
 
-open class GemItem(name: String,
-                   gemSymbol: String = "#",
-                   val doLapping: Boolean = false,
-                   override val dataGen: ItemModelProvider.(GemType, Item) -> Unit,
-                   builder: (GemType) -> Item)
-: RegistryGemFeature<Item>(name, gemSymbol, builder), DataGenFeature<ItemModelProvider, GemType, Item>
+open class GemItem(             location:   ResourceLocation,
+                                gemSymbol:  String = "#",
+                            val doLapping:  Boolean = false,
+                   override val dataGen:    ItemModelProvider.(GemType, Item) -> Unit,
+                            val builder:    (GemType) -> Item) :
+    MaterialItem<GemType>(location, gemSymbol)
 {
-    constructor(name: String,
+    constructor(location: ResourceLocation,
                 gemSymbol: String = "#",
                 dataGen: ItemModelProvider.(GemType, Item) -> Unit = { _, i -> basicItem(i) },
-                builder: (GemType) -> Item) : this(name, gemSymbol, false, dataGen, builder)
+                builder: (GemType) -> Item) : this(location, gemSymbol, false, dataGen, builder)
 
-    constructor(name: String,
+    constructor(location: ResourceLocation,
                 dataGen: ItemModelProvider.(GemType, Item) -> Unit = { _, i -> basicItem(i) },
-                builder: (GemType) -> Item) : this(name, "#", false, dataGen, builder)
+                builder: (GemType) -> Item) : this(location, "#", false, dataGen, builder)
 
-    constructor(name: String, builder: (GemType) -> Item) :
-            this(name, "#", false, { _, i -> basicItem(i) }, builder)
+    constructor(location: ResourceLocation , builder: (GemType) -> Item) :
+            this(location, "#", false, { _, i -> basicItem(i) }, builder)
 
-    constructor(name: String, doLapping: Boolean, builder: (GemType) -> Item) :
-            this(name, "#", doLapping, { _, i -> basicItem(i) }, builder)
+    constructor(location: ResourceLocation, doLapping: Boolean, builder: (GemType) -> Item) :
+            this(location, "#", doLapping, { _, i -> basicItem(i) }, builder)
+
 
     init { all += this }
+
 
     override fun registerPost(material: GemType, context: DeferredRegister<Item>, feature: () -> Item) {
         if (doLapping) cuttersRegisters[feature] = material.mosh
     }
 
     override fun getFeature(material: GemType) = get(material)!!
+
+    override fun getFeatureBuilder(material: GemType) = builder(material)
+
 
     companion object : ClassRegister<GemItem>() {
         val defaultProperty = { it: GemType -> Item.Properties().rarity(it.rarity) }
