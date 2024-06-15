@@ -1,7 +1,7 @@
 package com.cosmic_jewelry.common.world.inventory.menu
 
-import com.cosmic_jewelry.common.core.gem.feature.RegistryGemItem.Companion.cutterMohs
-import com.cosmic_jewelry.common.core.gem.feature.RegistryGemItem.Companion.isCutter
+import com.cosmic_jewelry.common.core.material.feature.gem.GemItem.Companion.cutterMohs
+import com.cosmic_jewelry.common.core.material.feature.gem.GemItem.Companion.isCutter
 import com.cosmic_jewelry.common.registry.BlockRegistry.lappingTableBlock
 import com.cosmic_jewelry.common.registry.MenuTypeRegistry.lappingTableMenu
 import com.cosmic_jewelry.common.world.level.block.entity.LappingTableBlockEntity

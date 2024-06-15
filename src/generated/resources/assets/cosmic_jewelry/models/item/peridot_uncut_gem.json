@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "cosmic_jewelry:item/peridot_uncut_gem"
-  }
-}

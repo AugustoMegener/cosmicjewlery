@@ -1,8 +1,8 @@
 package com.cosmic_jewelry.common.registry
 
 import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.common.core.gem.feature.RegistryGemItem
-import com.cosmic_jewelry.common.core.gem.feature.RegistryGemItem.Companion.defaultProperty
+import com.cosmic_jewelry.common.core.material.feature.gem.GemItem
+import com.cosmic_jewelry.common.core.material.feature.gem.GemItem.Companion.defaultProperty
 import com.cosmic_jewelry.common.registry.BlockRegistry.lappingTableBlock
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
@@ -16,6 +16,6 @@ object ItemRegistry {
 
     val lappingTableBlockItem by items.register("lapping_table") { -> BlockItem(lappingTableBlock, Properties()) }
 
-    val cutGemItem = RegistryGemItem("_gem", true)       { Item(defaultProperty(it)) }
-    val rawGemItem = RegistryGemItem("_uncut_gem", true) { Item(defaultProperty(it)) }
+    val cutGemItem = GemItem("#_gem", true)       { Item(defaultProperty(it)) }
+    val rawGemItem = GemItem("uncut_#_gem", true) { Item(defaultProperty(it)) }
 }

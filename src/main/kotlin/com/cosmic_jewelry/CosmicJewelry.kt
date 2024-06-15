@@ -1,18 +1,18 @@
 package com.cosmic_jewelry
 
-import com.cosmic_jewelry.common.core.gem.GemRecipe.Companion.cutGemBlockRecipe
-import com.cosmic_jewelry.common.core.gem.GemRecipe.Companion.gemLappingRecipe
-import com.cosmic_jewelry.common.core.gem.GemRecipe.Companion.gemPillarBlockRecipe
-import com.cosmic_jewelry.common.core.gem.GemRecipe.Companion.gemTilesBlockRecipe
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.amethystGem
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.blueQuartzGem
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.carnelianGem
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.lapisLazuliGem
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.orangeJasperGem
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.peridotGem
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.roseQuartzGem
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.rubyGem
-import com.cosmic_jewelry.common.core.gem.GemType.Companion.sapphireGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.amethystGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.blueQuartzGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.carnelianGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.lapisLazuliGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.orangeJasperGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.peridotGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.roseQuartzGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.rubyGem
+import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.sapphireGem
+import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.cutGemBlockRecipe
+import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemLappingRecipe
+import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemPillarBlockRecipe
+import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemTilesBlockRecipe
 import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.blockEntityTypes
 import com.cosmic_jewelry.common.registry.BlockRegistry.blocks
 import com.cosmic_jewelry.common.registry.BlockRegistry.cutGemBlock
@@ -20,10 +20,11 @@ import com.cosmic_jewelry.common.registry.BlockRegistry.deepslateGemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.gemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.pillarBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.tilesBlock
-import com.cosmic_jewelry.common.registry.GemTypeRegister
 import com.cosmic_jewelry.common.registry.ItemRegistry.cutGemItem
 import com.cosmic_jewelry.common.registry.ItemRegistry.items
 import com.cosmic_jewelry.common.registry.ItemRegistry.rawGemItem
+import com.cosmic_jewelry.common.registry.MaterialRegister
+import com.cosmic_jewelry.common.registry.MaterialRegister.MaterialBuilder.Companion.blockFeature
 import com.cosmic_jewelry.common.registry.MenuTypeRegistry.menuTypes
 import com.cosmic_jewelry.common.registry.RecipeRegistry.recipeSerializers
 import com.cosmic_jewelry.common.registry.RecipeRegistry.recipeTypes
@@ -46,38 +47,37 @@ object CosmicJewelry {
     }
 
     private fun registerGem() {
-        GemTypeRegister(ID) {
-            register("peridot"       to peridotGem,
-                             "amethyst"      to amethystGem,
-                             "blue_quartz"   to blueQuartzGem,
-                             "carnelian"     to carnelianGem,
-                             "lapis_lazuli"  to lapisLazuliGem,
-                             "orange_jasper" to orangeJasperGem,
-                             "rose_quartz"   to roseQuartzGem,
-                             "ruby"          to rubyGem,
-                             "sapphire"      to sapphireGem     )
+        MaterialRegister(ID) {
+            addMaterial(
+                "peridot"       to peridotGem,
+                "amethyst"      to amethystGem,
+                "blue_quartz"   to blueQuartzGem,
+                "carnelian"     to carnelianGem,
+                "lapis_lazuli"  to lapisLazuliGem,
+                "orange_jasper" to orangeJasperGem,
+                "rose_quartz"   to roseQuartzGem,
+                "ruby"          to rubyGem,
+                "sapphire"      to sapphireGem
+            )
             {
                 blockFeature(blocks, items,
-                             cutGemBlock, tilesBlock, pillarBlock)
+                    cutGemBlock, tilesBlock, pillarBlock)
+
                 feature(items, cutGemItem)
-                recipe(cutGemBlockRecipe, gemPillarBlockRecipe, gemTilesBlockRecipe)
+                feature(cutGemBlockRecipe, gemPillarBlockRecipe, gemTilesBlockRecipe)
             }
 
-            register("peridot" to peridotGem) {
+            addFeatures(peridotGem) {
                 blockFeature(blocks, items, deepslateGemOreBlock)
             }
 
-            register("ruby"     to rubyGem,
-                             "sapphire" to sapphireGem) {
+            addFeatures(rubyGem, sapphireGem) {
                 blockFeature(blocks, items, gemOreBlock)
             }
 
-            register("ruby"     to rubyGem,
-                             "sapphire" to sapphireGem,
-                             "peridot"  to peridotGem) {
-                blockFeature(blocks, items)
+            addFeatures(rubyGem, sapphireGem, peridotGem) {
                 feature(items, rawGemItem)
-                recipe(gemLappingRecipe)
+                feature(gemLappingRecipe)
             }
         }
     }

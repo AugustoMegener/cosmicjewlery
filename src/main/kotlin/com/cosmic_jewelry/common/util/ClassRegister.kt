@@ -1,4 +1,4 @@
-package com.cosmic_jewelry.common.core.gem
+package com.cosmic_jewelry.common.util
 
 abstract class ClassRegister<T> {
     protected val all = arrayListOf<T>()

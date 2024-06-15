@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "cosmic_jewelry:peridot_deepstale_ore"
+              "name": "cosmic_jewelry:deepstale_peridot_ore"
             },
             {
               "type": "minecraft:item",
@@ -40,7 +40,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "cosmic_jewelry:peridot_uncut_gem"
+              "name": "cosmic_jewelry:uncut_peridot_gem"
             }
           ]
         }
@@ -48,5 +48,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "cosmic_jewelry:blocks/peridot_deepstale_ore"
+  "random_sequence": "cosmic_jewelry:blocks/deepstale_peridot_ore"
 }
