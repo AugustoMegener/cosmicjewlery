@@ -8,7 +8,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.core.HolderLookup
 import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.StreamCodec
-import net.minecraft.world.Container
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.Recipe
@@ -16,23 +15,23 @@ import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 
-class LappingRecipe(val input: Ingredient, val result: ItemStack) : Recipe<Container> {
+class LappingRecipe(val input: Ingredient, val result: ItemStack) : Recipe<LappingRecipeInput> {
 
-    override fun matches(pContainer: Container, pLevel: Level): Boolean {
-        val inputStack = pContainer.getItem(1)
-        val inputStackMohs = inputStack.cutterMohs
-        val cutterMohs = pContainer.getItem(0).cutterMohs
+    override fun matches(pInput: LappingRecipeInput, pLevel: Level): Boolean {
+        val inputStack      = pInput.getItem(1)
+        val inputStackMohs  = inputStack.cutterMohs
+        val cutterMohs      = pInput.getItem(0).cutterMohs
 
         return input.test(inputStack) && cutterMohs != null && inputStackMohs != null && cutterMohs >= inputStackMohs
     }
 
 
-    override fun assemble(pCraftingContainer: Container, pRegistries: HolderLookup.Provider?): ItemStack =
-        result.copy().also { pCraftingContainer.removeItem(1, 1) }
+    override fun assemble(pInput: LappingRecipeInput, pRegistries: HolderLookup.Provider) =
+        result.copy().also { pInput.inventory.extractItem(pInput.inputSlot, 1, false) }
 
     override fun canCraftInDimensions(pWidth: Int, pHeight: Int) = true
 
-    override fun getResultItem(pRegistries: HolderLookup.Provider?) = result
+    override fun getResultItem(pRegistries: HolderLookup.Provider) = result
 
     override fun getSerializer(): RecipeSerializer<LappingRecipe> = lappingRecipeSerializer
     override fun getType(): RecipeType<LappingRecipe> = lappingRecipeType

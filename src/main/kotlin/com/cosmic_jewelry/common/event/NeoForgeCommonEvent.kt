@@ -10,11 +10,11 @@ import net.neoforged.neoforge.client.event.RenderTooltipEvent
 
 @EventBusSubscriber(modid = ID, bus = EventBusSubscriber.Bus.GAME)
 object NeoForgeCommonEvent {
+
     @SubscribeEvent
     fun onRenderTooltip(event: RenderTooltipEvent.GatherComponents) {
         GemItem.cuttersMohsMap[event.itemStack.item]?.also {
             event.tooltipElements += Either.left(Component.literal(("Mohs: ")).withColor(0xffbb00).append("$it"))
         }
-
     }
 }

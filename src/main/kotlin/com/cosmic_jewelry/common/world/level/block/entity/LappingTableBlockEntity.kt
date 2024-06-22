@@ -3,8 +3,8 @@ package com.cosmic_jewelry.common.world.level.block.entity
 import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.lappingTableBlockEntityType
 import com.cosmic_jewelry.common.registry.RecipeRegistry.lappingRecipeType
-import com.cosmic_jewelry.common.util.NeoForgeUtil.container
 import com.cosmic_jewelry.common.world.inventory.menu.LappingTableMenu
+import com.cosmic_jewelry.common.world.item.crafting.LappingRecipeInput
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
@@ -24,7 +24,9 @@ class LappingTableBlockEntity(pPos: BlockPos, pBlockState: BlockState)
     private val blockLevel by lazy { level!! }
     private val recipeManager by lazy { blockLevel.recipeManager }
 
-    val actualRecipe get() = recipeManager.getRecipeFor(lappingRecipeType, inventory.container, blockLevel).getOrNull()
+    val actualRecipe get() = recipeManager.getRecipeFor(lappingRecipeType,
+                                                        LappingRecipeInput(inventory),
+                                                        blockLevel).getOrNull()
 
     val inventory: ItemStackHandler = object : ItemStackHandler(4) {
 
@@ -35,14 +37,15 @@ class LappingTableBlockEntity(pPos: BlockPos, pBlockState: BlockState)
 
             if (slot == 2 || slot == 3) return
 
+            val inv = this // BRUH...
+
             actualRecipe?.run {
                 if (getStackInSlot(3).takeIf { !it.isEmpty }?.let { !it.`is`(value.result.item) } == true ||
                     extractItem(0, 1, true).takeIf { it != ItemStack.EMPTY }
                         ?.run { insertItem(2, this, true) == ItemStack.EMPTY } == false) return@run
 
-                insertItem(3, value.assemble(container, null), false)
+                insertItem(3, value.assemble(LappingRecipeInput(inv), blockLevel.registryAccess()), false)
                 insertItem(2, extractItem(0, 1, false), false)
-
             }
         }
     }

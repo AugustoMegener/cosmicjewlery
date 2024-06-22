@@ -14,19 +14,22 @@ class GemLootTableProvider(pOutput: PackOutput,
                            pRegistries: CompletableFuture<HolderLookup.Provider>)
     : LootTableProvider(pOutput,
                         setOf(),
-                        mutableListOf(SubProviderEntry({ gemOreGenProvider }, LootContextParamSets.BLOCK)),
-                        pRegistries                                                                         )
+                        mutableListOf(SubProviderEntry({ gemOreGenProvider(it) }, LootContextParamSets.BLOCK)),
+                        pRegistries )
 {
     companion object {
-        val gemOreGenProvider = object : BlockLootSubProvider(setOf(), FeatureFlags.REGISTRY.allFlags())
-        {
-            override fun generate() {
-                GemOre.register.flatMap { it.content.entries } .forEach { (g, b) ->
-                    b.also { add(it, createOreDrop(it, rawGemItem[g]!!)) }
+        private val gemOreGenProvider = { lookup: HolderLookup.Provider ->
+            object : BlockLootSubProvider(setOf(), FeatureFlags.REGISTRY.allFlags(), lookup) {
+                override fun generate() {
+                    GemOre.register.flatMap { it.content.entries }.forEach { (g, b) ->
+                        b.also { add(it, createOreDrop(it, rawGemItem[g]!!)) }
+                    }
                 }
-            }
 
-            override fun getKnownBlocks() = GemOre.register.flatMap { it.features } .map { it }.toMutableList()
+                override fun getKnownBlocks() = GemOre.register.flatMap { it.features }.map { it }.toMutableList()
+            }
         }
     }
+
+
 }

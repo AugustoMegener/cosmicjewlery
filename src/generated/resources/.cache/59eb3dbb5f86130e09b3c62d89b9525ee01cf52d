@@ -1,4 +1,4 @@
-// 1.20.6	2024-06-14T12:20:39.0249503	Loot Tables
-d2cce9cd14f4f737250820fa9bec4b855017014a data/cosmic_jewelry/loot_tables/blocks/deepstale_peridot_ore.json
-6a847cbd890043fc4c241daabe5ef3244652a903 data/cosmic_jewelry/loot_tables/blocks/ruby_ore.json
-e2e505d6d73ffd093433fe98e7c38411bc8a9d05 data/cosmic_jewelry/loot_tables/blocks/sapphire_ore.json
+// 1.21	2024-06-21T11:55:30.9824482	Loot Tables
+bb6c0dca7bf3db309b90505a8f32585953c2a895 data/cosmic_jewelry/loot_table/blocks/deepstale_peridot_ore.json
+1429bffd1be9e8d22716e6eb8649b09aa5c04e17 data/cosmic_jewelry/loot_table/blocks/ruby_ore.json
+6e47e1c079ad2f77d5a4805ba628266ef08a9442 data/cosmic_jewelry/loot_table/blocks/sapphire_ore.json

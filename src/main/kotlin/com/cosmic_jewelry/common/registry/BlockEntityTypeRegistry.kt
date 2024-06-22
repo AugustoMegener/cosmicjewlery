@@ -15,4 +15,5 @@ object BlockEntityTypeRegistry {
     val lappingTableBlockEntityType by blockEntityTypes.register("lapping_table") { ->
         BlockEntityType.Builder.of({ p, s -> LappingTableBlockEntity(p, s) }, lappingTableBlock).build(null)
     }
+
 }

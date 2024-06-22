@@ -6,6 +6,7 @@ import com.cosmic_jewelry.common.core.material.feature.MaterialFeatureBase
 import com.cosmic_jewelry.common.core.material.feature.RegistryMaterialFeature
 import com.cosmic_jewelry.common.core.material.feature.gem.GemBlock
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.ResourceLocation.parse
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -47,20 +48,20 @@ object MaterialRegister {
     }
 
     fun <M : Material<M>> addMaterial(name: String, material: M, features: MaterialBuilder<M>.() -> Unit) {
-        material.registry[ResourceLocation(id!!, name)] = material
+        material.registry[parse(("${id!!}:$name"))] = material
         addFeatures(material, features)
     }
 
     fun <M : Material<M>> addMaterial(vararg materials: Pair<String, M>, features: MaterialBuilder<M>.() -> Unit) {
         materials.forEach {
-            it.second.registry[ResourceLocation(id!!, it.first)] = it.second
+            it.second.registry[parse(("${id!!}:${it.first}"))] = it.second
             addFeatures(it.second, features)
         }
     }
 
     fun <M : Material<M>> addMaterial(vararg materials: Triple<String, M, MaterialBuilder<M>.() -> Unit>) {
         materials.forEach {
-            it.second.registry[ResourceLocation(id!!, it.first)] = it.second
+            it.second.registry[parse(("${id!!}:${it.first}"))] = it.second
             addFeatures(it.second, it.third)
         }
     }

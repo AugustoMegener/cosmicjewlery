@@ -14,26 +14,25 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.data.recipes.*
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.ResourceLocation.parse
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 import java.util.*
 
-open class GemRecipe(
-    name: String,
-    gemSymbol: String,
-    private val builder: (GemType, ResourceLocation, RecipeOutput) -> Unit,
-) : GemFeature<String, (RecipeOutput) -> Unit>(name, gemSymbol)
+open class GemRecipe(name: String,
+                     gemSymbol: String,
+                     private val builder: (GemType, ResourceLocation, RecipeOutput) -> Unit, )
+: GemFeature<String, (RecipeOutput) -> Unit>(name, gemSymbol)
 {
-
     constructor(name: String, builder: (GemType, ResourceLocation, RecipeOutput) -> Unit) :
             this(name, "#", builder)
 
     init { all += this }
 
     override fun builder(context: String, material: GemType): () -> (RecipeOutput) -> Unit =
-        { { builder(material, ResourceLocation(context, createName(material)), it) } }
+        { { builder(material, parse(("$context:${createName(material)}")), it) } }
 
 
     companion object : ClassRegister<GemRecipe>() {
