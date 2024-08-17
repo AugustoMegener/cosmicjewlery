@@ -1,11 +1,9 @@
 package com.cosmic_jewelry.common.registry
 
-import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.core.material.Material
 import com.cosmic_jewelry.common.core.material.feature.MaterialFeatureBase
-import com.cosmic_jewelry.common.core.material.feature.RegistryMaterialFeature
-import com.cosmic_jewelry.common.core.material.feature.gem.GemBlock
-import net.minecraft.resources.ResourceLocation
+import com.cosmic_jewelry.common.core.material.feature.MaterialOre
+import com.cosmic_jewelry.common.core.material.feature.RegistrableMaterialFeature
 import net.minecraft.resources.ResourceLocation.parse
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
@@ -31,19 +29,17 @@ object MaterialRegister {
             features.forEach { it.register(material, id) }
         }
 
-        fun <T> feature(register: DeferredRegister<T>, vararg registryGemFeature:RegistryMaterialFeature<M, T>) {
+        fun <T> feature(register: DeferredRegister<T>, vararg registryGemFeature:RegistrableMaterialFeature<M, T>) {
             registryGemFeature.forEach { it.register(material, register)  }
         }
 
         companion object {
-            fun MaterialBuilder<GemType>.blockFeature(registerBlock: DeferredRegister<Block>,
-                                                      registerItem:  DeferredRegister<Item>,
-                                                      vararg gemFeature: GemBlock
-            )
-            {
-                feature(registerBlock, *gemFeature)
-                feature(registerItem, *gemFeature.map { it.item }.toTypedArray())
-            }
+            fun <M: Material<M>> MaterialBuilder<M>.blockFeature(registerBlock: DeferredRegister<Block>,
+                                                                 registerItem : DeferredRegister<Item>,
+                                                          vararg gemFeature   : Any)
+            { val features = gemFeature.map { it as MaterialOre<M> }
+              feature(registerBlock, *features.toTypedArray())
+              feature(registerItem, *features.map { it.item }.toTypedArray()) }
         }
     }
 

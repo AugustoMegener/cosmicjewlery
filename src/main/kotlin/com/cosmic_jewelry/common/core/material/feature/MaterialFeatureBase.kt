@@ -25,7 +25,6 @@ abstract class MaterialFeatureBase<M : Material<M>, C, F>(protected val name: St
     open fun  registerPre(material: M, context: C) {}
     open fun registerPost(material: M, context: C, feature: () -> F) {}
 
-    abstract fun getMaterialName(material: M): String
-    protected fun createName(material: M) = name.replace(materialSymbol, getMaterialName(material))
+    protected fun createName(material: M) = name.replace(materialSymbol, material.name)
     protected fun createPath(material: M) = loc("${material.owner}:${createName(material)}")
 }

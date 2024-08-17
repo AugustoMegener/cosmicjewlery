@@ -1,16 +1,18 @@
 package com.cosmic_jewelry.client.datagen
 
-import com.cosmic_jewelry.common.core.material.feature.gem.GemBlock
+import com.cosmic_jewelry.common.core.material.feature.MaterialBlock
 import net.minecraft.data.PackOutput
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper
 
-class GemBlockStateProvider(id: String, output: PackOutput, fileHelper: ExistingFileHelper)
+class MaterialBlockStateProvider(id: String, output: PackOutput, fileHelper: ExistingFileHelper)
     : BlockStateProvider(output, id, fileHelper)
 {
     override fun registerStatesAndModels() {
-        GemBlock.register.forEach { b -> b.content.forEach { g -> b.generateData(this, g.key) } }
+        //GemBlock.register.forEach { b -> b.content.forEach { g -> b.generateData(this, g.key) } }
 
+        // TODO: Check if it's really working
+        MaterialBlock.register.forEach { b -> b.content.forEach { g -> b.generateData(this, g.key) } }
 
         /*cutGemBlock.allFeatures.forEach { it.get().also { b -> simpleBlockWithItem(b, cubeAll(b)) } }
         tilesBlock .allFeatures.forEach { it.get().also { b -> simpleBlockWithItem(b, cubeAll(b)) } }

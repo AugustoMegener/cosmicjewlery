@@ -26,7 +26,7 @@ object ModCommonEvent {
             )
             addProvider(
                 event.includeServer(),
-                GemLootTableProvider(packOutput, event.lookupProvider)
+                MaterialLootTableProvider(packOutput, event.lookupProvider)
             )
             addProvider(
                 event.includeServer(),

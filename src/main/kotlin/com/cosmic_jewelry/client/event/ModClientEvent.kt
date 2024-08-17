@@ -1,8 +1,8 @@
 package com.cosmic_jewelry.client.event
 
 import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.client.datagen.GemBlockStateProvider
-import com.cosmic_jewelry.client.datagen.GemItemModelProvider
+import com.cosmic_jewelry.client.datagen.MaterialBlockStateProvider
+import com.cosmic_jewelry.client.datagen.MaterialItemModelProvider
 import com.cosmic_jewelry.client.gui.screens.inventory.LappingTableScreen
 import com.cosmic_jewelry.common.registry.MenuTypeRegistry.lappingTableMenu
 import net.neoforged.api.distmarker.Dist
@@ -23,8 +23,8 @@ object ModClientEvent {
     fun onGatherData(event: GatherDataEvent) {
         with(event.generator) {
 
-            addProvider(event.includeClient(), GemBlockStateProvider(ID, packOutput, event.existingFileHelper))
-            addProvider(event.includeClient(),  GemItemModelProvider(ID, packOutput, event.existingFileHelper))
+            addProvider(event.includeClient(), MaterialBlockStateProvider(ID, packOutput, event.existingFileHelper))
+            addProvider(event.includeClient(),  MaterialItemModelProvider(ID, packOutput, event.existingFileHelper))
         }
     }
 }

@@ -1,9 +1,10 @@
 package com.cosmic_jewelry.common.core.material.gem
 
 
-import com.cosmic_jewelry.common.core.material.feature.gem.GemOre.Companion.MiningLevel
-import com.cosmic_jewelry.common.core.material.feature.gem.GemOre.Companion.MiningLevel.Companion.ironLevel
-import com.cosmic_jewelry.common.core.material.feature.gem.GemOre.Companion.MiningLevel.Companion.stoneLevel
+
+import com.cosmic_jewelry.common.core.material.feature.MaterialOre
+import com.cosmic_jewelry.common.core.material.feature.MaterialOre.Companion.MiningLevel.Companion.ironLevel
+import com.cosmic_jewelry.common.core.material.feature.MaterialOre.Companion.MiningLevel.Companion.stoneLevel
 import com.cosmic_jewelry.common.datagen.OreGenProvider.commonOrePlacement
 import com.cosmic_jewelry.common.registry.BlockRegistry.deepslateGemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.gemOreBlock
@@ -31,7 +32,7 @@ class GemFamily(val defaultMosh: Float, val defaultRarity: Rarity, builder: GemF
     var orePlacements = listOf<PlacementModifier>(); private set
 
     class GemFamilyBuilder internal constructor(private val target: GemFamily) {
-        fun miningLevel(level: MiningLevel) { target.miningLevel = level }
+        fun miningLevel(level: MaterialOre.Companion.MiningLevel) { target.miningLevel = level }
         fun oreConfiguration(configuration: (GemType) -> OreConfiguration) { target.oreConfiguration = configuration }
         fun orePlacements(placements: List<PlacementModifier>) { target.orePlacements += placements }
     }

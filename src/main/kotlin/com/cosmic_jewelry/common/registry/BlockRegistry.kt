@@ -25,11 +25,11 @@ object BlockRegistry {
     val gemOreBlock = GemOre("#_ore")
     val deepslateGemOreBlock = GemOre("deepstale_#_ore") { it -> (it + 4.5f) / 2 }
 
-    val cutGemBlock = GemBlock("#_gem_block") { Block(Properties.of().strength(it.mosh)) }
-    val tilesBlock  = GemBlock("#_tiles") { Block(Properties.of().strength(it.mosh)) }
+    val cutGemBlock = GemBlock("#_gem_block") { Block(Properties.of().strength(it.mohs)) }
+    val tilesBlock  = GemBlock("#_tiles") { Block(Properties.of().strength(it.mohs)) }
     val pillarBlock = GemBlock("#_pillar", { _, b -> (b as RotatedPillarBlock)
         logBlock(b)
         simpleBlockItem(b, models().withExistingParent(
             BuiltInRegistries.BLOCK.getKey(b).toString(), "minecraft:block/cube_column"))
-    }) { RotatedPillarBlock(Properties.of().strength(it.mosh)) }
+    }) { RotatedPillarBlock(Properties.of().strength(it.mohs)) }
 }

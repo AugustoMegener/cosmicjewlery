@@ -1,5 +1,6 @@
 package com.cosmic_jewelry.common.core.material.feature.gem
 
+import com.cosmic_jewelry.common.core.material.feature.MaterialRecipe
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.registry.BlockRegistry.cutGemBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.pillarBlock
@@ -23,17 +24,13 @@ import java.util.*
 
 open class GemRecipe(name: String,
                      gemSymbol: String,
-                     private val builder: (GemType, ResourceLocation, RecipeOutput) -> Unit, )
-: GemFeature<String, (RecipeOutput) -> Unit>(name, gemSymbol)
+                     override val builder: (GemType, ResourceLocation, RecipeOutput) -> Unit, )
+: MaterialRecipe<GemType>(name, gemSymbol)
 {
     constructor(name: String, builder: (GemType, ResourceLocation, RecipeOutput) -> Unit) :
             this(name, "#", builder)
 
     init { all += this }
-
-    override fun builder(context: String, material: GemType): () -> (RecipeOutput) -> Unit =
-        { { builder(material, parse(("$context:${createName(material)}")), it) } }
-
 
     companion object : ClassRegister<GemRecipe>() {
         val cutGemBlockRecipe = GemRecipe("#_cut_gems") { g, l, o ->

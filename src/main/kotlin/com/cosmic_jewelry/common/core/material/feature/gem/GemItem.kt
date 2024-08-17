@@ -1,8 +1,8 @@
 package com.cosmic_jewelry.common.core.material.feature.gem
 
-import com.cosmic_jewelry.common.util.ClassRegister
+import com.cosmic_jewelry.common.core.material.feature.MaterialItem
 import com.cosmic_jewelry.common.core.material.gem.GemType
-import com.cosmic_jewelry.common.core.material.feature.DataGenFeature
+import com.cosmic_jewelry.common.util.ClassRegister
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider
@@ -12,8 +12,9 @@ open class GemItem(name: String,
                    gemSymbol: String = "#",
                    val doLapping: Boolean = false,
                    override val dataGen: ItemModelProvider.(GemType, Item) -> Unit,
-                   builder: (GemType) -> Item)
-: RegistryGemFeature<Item>(name, gemSymbol, builder), DataGenFeature<ItemModelProvider, GemType, Item>
+                   override val featureBuilder: (GemType) -> Item
+)
+: MaterialItem<GemType>(name, gemSymbol)
 {
     constructor(name: String,
                 gemSymbol: String = "#",
@@ -33,7 +34,7 @@ open class GemItem(name: String,
     init { all += this }
 
     override fun registerPost(material: GemType, context: DeferredRegister<Item>, feature: () -> Item) {
-        if (doLapping) cuttersRegisters[feature] = material.mosh
+        if (doLapping) cuttersRegisters[feature] = material.mohs
     }
 
     override fun getFeature(material: GemType) = get(material)!!

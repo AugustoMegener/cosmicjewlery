@@ -10,7 +10,7 @@ import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Rarity
 
-class GemType internal constructor(val family: GemFamily, val mosh: Float, val rarity: Rarity) : Material<GemType> {
+class GemType internal constructor(val family: GemFamily, override val mohs: Float, val rarity: Rarity) : Material<GemType> {
 
     override val name:  String get() = location.path
     override val owner: String get() = location.namespace

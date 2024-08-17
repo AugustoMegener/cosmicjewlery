@@ -5,6 +5,6 @@ import net.neoforged.neoforge.common.data.LanguageProvider
 
 class GemLanguageProvider(modId: String, output: PackOutput,  locale: String) : LanguageProvider(output, modId, locale) {
     override fun addTranslations() {
-
+        // No.
     }
 }
