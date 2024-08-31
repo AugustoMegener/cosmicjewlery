@@ -3,26 +3,24 @@ package com.cosmic_jewelry.common.core.material.feature.gem
 import com.cosmic_jewelry.common.core.material.feature.MaterialBlock
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.util.ClassRegister
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.Block
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 
 open class GemBlock(             name           : String,
-                                 gemSymbol      : String = "#",
-                    override val dataGen        : BlockStateProvider.(GemType, Block) -> Unit,
-                    override val featureBuilder : (GemType) -> Block)
-: MaterialBlock<GemType>(name, gemSymbol)
+                    override val featureBuilder : (GemType) -> Block,
+                    override val dataGen        : BlockStateProvider.(GemType, Block) -> Unit =
+                                     { _, b -> simpleBlockWithItem(b, cubeAll(b)) },
+                                 tags           : List<TagKey<Block>> = listOf(),
+                                 gemSymbol      : String = "#")
+: MaterialBlock<GemType>(name, tags,  gemSymbol)
 {
-    constructor(suffix: String, gemSymbol: String, builder: (GemType) -> Block) :
-            this(suffix, gemSymbol, { _, b -> simpleBlockWithItem(b, cubeAll(b)) }, builder)
 
-    constructor(suffix: String, builder: (GemType) -> Block) :
-            this(suffix, { _, b -> simpleBlockWithItem(b, cubeAll(b)) }, builder)
+    override val item = GemItem(name, { BlockItem(this[it]!!, GemItem.defaultProperty(it)) }, { _, _ -> })
 
-    constructor(suffix: String, dataGen: BlockStateProvider.(GemType, Block) -> Unit, builder: (GemType) -> Block) :
-            this(suffix, "#", dataGen, builder)
-
-    override val item = GemItem(name, { _, _ -> }) { BlockItem(this[it]!!, GemItem.defaultProperty(it)) }
+    override fun <T : GemType> getMaterialTags(material: T): List<TagKey<Block>> =
+        listOf(material.family.miningLevel.tag)
 
     init { all += this }
 

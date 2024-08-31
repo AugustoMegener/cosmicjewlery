@@ -5,6 +5,7 @@ import com.cosmic_jewelry.common.world.inventory.menu.LappingTableMenu
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.resources.ResourceLocation.parse
 import net.minecraft.world.entity.player.Inventory
 
@@ -21,6 +22,6 @@ class LappingTableScreen(pMenu: LappingTableMenu, pPlayerInventory: Inventory, p
     }
 
     companion object {
-        val background = parse(("$ID:textures/gui/container/lapping_table.png"))
+        val background: ResourceLocation = parse(("$ID:textures/gui/container/lapping_table.png"))
     }
 }

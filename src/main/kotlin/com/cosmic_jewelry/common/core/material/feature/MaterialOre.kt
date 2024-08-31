@@ -11,12 +11,14 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DropExperienceBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration
 import net.minecraft.world.level.levelgen.placement.PlacedFeature
+import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.registries.DeferredRegister
 
-abstract class MaterialOre<M: Material<M>>(name: String, gemSymbol: String = "#")
-    : MaterialBlock<M>(name, gemSymbol), DataGenFeature<BlockStateProvider, M, Block>
+abstract class MaterialOre<M: Material<M>>(name: String, tags: List<TagKey<Block>> = listOf(), gemSymbol: String = "#")
+    : MaterialBlock<M>(name,tags, gemSymbol), DataGenFeature<BlockStateProvider, M, Block>
 {
     abstract val miningTime: (Float) -> Float
     abstract val dropItem: MaterialItem<M>
@@ -40,8 +42,13 @@ abstract class MaterialOre<M: Material<M>>(name: String, gemSymbol: String = "#"
         configuredFeatureMap[feature] = ResourceKey.create(Registries.CONFIGURED_FEATURE, createPath(material))
     }
 
-    @Suppress("UNCHECKED_CAST")
-    fun getDropItemUnsafe(material: Any) = dropItem[material as M]
+    override fun <T: M> getDropItem(material: T) = dropItem[material]
+
+    abstract fun <T: M> getConfig(material: T): OreConfiguration
+    abstract fun <T: M> getPlacements(material: T): List<PlacementModifier>
+
+    @Suppress("UNCHECKED_CAST") fun getConfig(material: Any) = getConfig(material as M)
+    @Suppress("UNCHECKED_CAST") fun getPlacements(material: Any) = getPlacements(material as M)
 
     companion object : ClassRegister<MaterialOre<*>>() {
 

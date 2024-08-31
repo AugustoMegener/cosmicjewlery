@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "cosmic_jewelry:deepstale_peridot_ore"
+          "Name": "cosmic_jewelry:deepslate_peridot_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

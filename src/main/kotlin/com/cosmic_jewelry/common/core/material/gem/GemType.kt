@@ -36,8 +36,5 @@ class GemType internal constructor(val family: GemFamily, override val mohs: Flo
 
         val rubyGem         = corundumFamily.newGem(rarity = Rarity.COMMON)
         val sapphireGem     = corundumFamily.newGem()
-
     }
-
-
 }

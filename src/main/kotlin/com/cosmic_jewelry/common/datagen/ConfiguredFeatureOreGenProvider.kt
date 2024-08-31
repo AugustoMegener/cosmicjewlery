@@ -11,9 +11,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 object ConfiguredFeatureOreGenProvider {
     fun bootstrap(ctx: BootstrapContext<ConfiguredFeature<*, *>>) {
         MaterialOre.register.forEach { ore ->
-            ore.materialConfiguredFeature.forEach { (a, b) ->
-                FeatureUtils.register<OreConfiguration, Feature<OreConfiguration>>(ctx, b, Feature.ORE,
-                                                                                   a.getOreConfiguration(a))
+            ore.materialConfiguredFeature.forEach { (m, b) ->
+                FeatureUtils.register<OreConfiguration, Feature<OreConfiguration>>(ctx, b, Feature.ORE, ore.getConfig(m))
             }
         }
     }

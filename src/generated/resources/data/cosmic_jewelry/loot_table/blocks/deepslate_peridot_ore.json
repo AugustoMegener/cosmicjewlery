@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "cosmic_jewelry:deepstale_peridot_ore"
+              "name": "cosmic_jewelry:deepslate_peridot_ore"
             },
             {
               "type": "minecraft:item",
@@ -48,5 +48,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "cosmic_jewelry:blocks/deepstale_peridot_ore"
+  "random_sequence": "cosmic_jewelry:blocks/deepslate_peridot_ore"
 }

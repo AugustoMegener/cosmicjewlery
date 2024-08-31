@@ -16,6 +16,6 @@ object ItemRegistry {
 
     val lappingTableBlockItem by items.register("lapping_table") { -> BlockItem(lappingTableBlock, Properties()) }
 
-    val cutGemItem = GemItem("#_gem", true)       { Item(defaultProperty(it)) }
-    val rawGemItem = GemItem("uncut_#_gem", true) { Item(defaultProperty(it)) }
+    val cutGemItem = GemItem("#_gem", { Item(defaultProperty(it)) }, doLapping = true)
+    val rawGemItem = GemItem("uncut_#_gem", { Item(defaultProperty(it)) }, doLapping = true)
 }

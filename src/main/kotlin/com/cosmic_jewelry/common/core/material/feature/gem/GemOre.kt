@@ -1,33 +1,33 @@
 package com.cosmic_jewelry.common.core.material.feature.gem
 
+import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.feature.DataGenFeature
 import com.cosmic_jewelry.common.core.material.feature.MaterialOre
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.registry.ItemRegistry.rawGemItem
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
+import net.minecraft.resources.ResourceLocation.parse as loc
 
-class GemOre(name: String,
-             gemSymbol: String = "#",
-             override val miningTime: (Float) -> Float,
-             override val dataGen: BlockStateProvider.(GemType, Block) -> Unit, )
-: MaterialOre<GemType>(name, gemSymbol),
+class GemOre(             name       : String,
+             override val miningTime : (Float) -> Float = { it },
+             override val dataGen    : BlockStateProvider.(GemType, Block) -> Unit = { _, _ -> },
+                          tags       : List<TagKey<Block>> = listOf(),
+                          gemSymbol  : String = "#")
+: MaterialOre<GemType>(name, tags, gemSymbol),
     DataGenFeature<BlockStateProvider, GemType, Block>
 {
     override val dropItem = rawGemItem
 
-    override val item = GemItem(name, { _, _ -> }) { BlockItem(this[it]!!, GemItem.defaultProperty(it)) }
+    override fun <T : GemType> getPlacements(material: T) = material.family.orePlacements
 
-    constructor(name: String, miningTime: (Float) -> Float, dataGen: BlockStateProvider.(GemType, Block) -> Unit) :
-            this(name, "#", miningTime, dataGen)
+    override val item = GemItem(name, { BlockItem(this[it]!!, GemItem.defaultProperty(it)) }, { _, _ -> })
 
-    constructor(name: String, miningTime: (Float) -> Float) :
-            this(name, "#", miningTime, { _, b -> simpleBlockWithItem(b, cubeAll(b)) })
+    override fun <T : GemType> getConfig(material: T): OreConfiguration = material.family.oreConfiguration(material)
 
-    constructor(name: String, dataGen: BlockStateProvider.(GemType, Block) -> Unit) :
-            this(name, { (it + 3f) / 2 }, dataGen)
-
-    constructor(name: String) :
-            this(name, { _, b -> simpleBlockWithItem(b, cubeAll(b)) })
+    override val featureGeneralTag = TagKey.create(BuiltInRegistries.BLOCK.key(), loc("$ID:ore"))
 }

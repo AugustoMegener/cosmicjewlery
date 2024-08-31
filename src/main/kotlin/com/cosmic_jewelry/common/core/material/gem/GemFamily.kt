@@ -29,7 +29,7 @@ class GemFamily(val defaultMosh: Float, val defaultRarity: Rarity, builder: GemF
     var oreConfiguration = { g: GemType ->
         OreConfiguration(TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), gemOreBlock[g]!!.defaultBlockState(), 9) }
         private set
-    var orePlacements = listOf<PlacementModifier>(); private set
+    var orePlacements = arrayListOf<PlacementModifier>(); private set
 
     class GemFamilyBuilder internal constructor(private val target: GemFamily) {
         fun miningLevel(level: MaterialOre.Companion.MiningLevel) { target.miningLevel = level }

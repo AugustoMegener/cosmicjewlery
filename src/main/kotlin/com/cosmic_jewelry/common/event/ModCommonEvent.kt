@@ -1,9 +1,12 @@
 package com.cosmic_jewelry.common.event
 
 import com.cosmic_jewelry.CosmicJewelry.ID
+import com.cosmic_jewelry.common.core.material.feature.MaterialBlock
+import com.cosmic_jewelry.common.core.material.feature.MaterialItem
 import com.cosmic_jewelry.common.datagen.*
 import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.lappingTableBlockEntityType
 import net.minecraft.core.RegistrySetBuilder
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries.CONFIGURED_FEATURE
 import net.minecraft.core.registries.Registries.PLACED_FEATURE
 import net.neoforged.bus.api.SubscribeEvent
@@ -28,9 +31,16 @@ object ModCommonEvent {
                 event.includeServer(),
                 MaterialLootTableProvider(packOutput, event.lookupProvider)
             )
+
             addProvider(
                 event.includeServer(),
-                GemTagProvider(ID, packOutput, event.lookupProvider, event.existingFileHelper)
+                FeatureTagsProvider(ID, packOutput, event.lookupProvider, event.existingFileHelper,
+                                    BuiltInRegistries.BLOCK, MaterialBlock)
+            )
+            addProvider(
+                event.includeServer(),
+                FeatureTagsProvider(ID, packOutput, event.lookupProvider, event.existingFileHelper,
+                                    BuiltInRegistries.ITEM, MaterialItem)
             )
 
             addProvider(

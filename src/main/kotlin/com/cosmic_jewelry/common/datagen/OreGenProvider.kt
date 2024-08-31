@@ -1,21 +1,23 @@
 package com.cosmic_jewelry.common.datagen
 
-import com.cosmic_jewelry.common.core.material.feature.gem.GemOre
+import com.cosmic_jewelry.common.core.material.feature.MaterialOre
+import net.minecraft.core.Registry
 import net.minecraft.core.registries.Registries
 import net.minecraft.core.registries.Registries.PLACED_FEATURE
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.levelgen.placement.*
 
 object OreGenProvider {
 
-    val registry = PLACED_FEATURE
+    val registry: ResourceKey<Registry<PlacedFeature>> = PLACED_FEATURE
 
     fun bootstrap(ctx: BootstrapContext<PlacedFeature>) {
-        GemOre.register.flatMap { it.placementsToConfiguredFeature.entries } .forEach { (g, v) ->
+        MaterialOre.register.forEach { o -> o.placementsToConfiguredFeature.forEach { (g, v) ->
             PlacementUtils.register(
-                ctx, v.first, ctx.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(v.second), g.family.orePlacements)
-        }
+                ctx, v.first, ctx.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(v.second).delegate, o.getPlacements(g))
+        } }
     }
 
 

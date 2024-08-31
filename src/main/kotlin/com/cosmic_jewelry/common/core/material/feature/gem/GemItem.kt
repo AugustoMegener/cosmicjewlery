@@ -1,35 +1,26 @@
 package com.cosmic_jewelry.common.core.material.feature.gem
 
+import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.feature.MaterialItem
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.util.ClassRegister
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider
 import net.neoforged.neoforge.registries.DeferredRegister
+import net.minecraft.resources.ResourceLocation.parse as loc
 
 open class GemItem(name: String,
-                   gemSymbol: String = "#",
+                   override val featureBuilder: (GemType) -> Item = { Item(Item.Properties().rarity(it.rarity)) },
+                   override val dataGen: ItemModelProvider.(GemType, Item) -> Unit = { _, i -> basicItem(i) },
                    val doLapping: Boolean = false,
-                   override val dataGen: ItemModelProvider.(GemType, Item) -> Unit,
-                   override val featureBuilder: (GemType) -> Item
+                   tags: List<TagKey<Item>> = listOf(),
+                   gemSymbol: String = "#",
 )
-: MaterialItem<GemType>(name, gemSymbol)
+: MaterialItem<GemType>(name, tags, gemSymbol)
 {
-    constructor(name: String,
-                gemSymbol: String = "#",
-                dataGen: ItemModelProvider.(GemType, Item) -> Unit = { _, i -> basicItem(i) },
-                builder: (GemType) -> Item) : this(name, gemSymbol, false, dataGen, builder)
-
-    constructor(name: String,
-                dataGen: ItemModelProvider.(GemType, Item) -> Unit = { _, i -> basicItem(i) },
-                builder: (GemType) -> Item) : this(name, "#", false, dataGen, builder)
-
-    constructor(name: String, builder: (GemType) -> Item) :
-            this(name, "#", false, { _, i -> basicItem(i) }, builder)
-
-    constructor(name: String, doLapping: Boolean, builder: (GemType) -> Item) :
-            this(name, "#", doLapping, { _, i -> basicItem(i) }, builder)
 
     init { all += this }
 
@@ -54,4 +45,6 @@ open class GemItem(name: String,
         val Item.cutterMohs: Float? get() = cuttersMohsMap[this]
         val ItemStack.cutterMohs: Float? get() = this.item.cutterMohs
     }
+
+    override val featureGeneralTag = TagKey.create(BuiltInRegistries.ITEM.key(), loc("$ID:item"))
 }

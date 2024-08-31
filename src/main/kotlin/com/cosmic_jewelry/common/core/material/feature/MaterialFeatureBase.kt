@@ -1,11 +1,15 @@
 package com.cosmic_jewelry.common.core.material.feature
 
+import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.Material
 import net.minecraft.resources.ResourceLocation.parse as loc
 
-abstract class MaterialFeatureBase<M : Material<M>, C, F>(protected val name: String,
-                                                       private val materialSymbol: String = "#")
-{
+abstract class MaterialFeatureBase<M : Material<M>, C, F>(protected val name            : String,
+                                                          private   val materialSymbol  : String = "#") {
+
+    protected val genericName = name.replace(materialSymbol, "material")
+    protected val genericPath = loc("$ID:${genericName}")
+
     private val registerMap = HashMap<M, () -> F>()
 
     val content   by lazy { registerMap.mapValues { it.value() }       }
@@ -27,4 +31,7 @@ abstract class MaterialFeatureBase<M : Material<M>, C, F>(protected val name: St
 
     protected fun createName(material: M) = name.replace(materialSymbol, material.name)
     protected fun createPath(material: M) = loc("${material.owner}:${createName(material)}")
+
+
+
 }

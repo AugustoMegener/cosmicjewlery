@@ -10,7 +10,8 @@ import net.neoforged.neoforge.registries.DeferredRegister
 import thedarkcolour.kotlinforforge.neoforge.forge.getValue
 
 object BlockEntityTypeRegistry {
-    val blockEntityTypes = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ID)
+    val blockEntityTypes: DeferredRegister<BlockEntityType<*>> =
+        DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ID)
 
     val lappingTableBlockEntityType by blockEntityTypes.register("lapping_table") { ->
         BlockEntityType.Builder.of({ p, s -> LappingTableBlockEntity(p, s) }, lappingTableBlock).build(null)
