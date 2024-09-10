@@ -2,7 +2,7 @@ package com.cosmic_jewelry.common.datagen
 
 import com.cosmic_jewelry.common.core.material.feature.MaterialOre
 import net.minecraft.core.Registry
-import net.minecraft.core.registries.Registries
+import net.minecraft.core.registries.Registries.CONFIGURED_FEATURE
 import net.minecraft.core.registries.Registries.PLACED_FEATURE
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.placement.PlacementUtils
@@ -16,8 +16,10 @@ object OreGenProvider {
     fun bootstrap(ctx: BootstrapContext<PlacedFeature>) {
         MaterialOre.register.forEach { o -> o.placementsToConfiguredFeature.forEach { (g, v) ->
             PlacementUtils.register(
-                ctx, v.first, ctx.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(v.second).delegate, o.getPlacements(g))
+                ctx, v.first, ctx.lookup(CONFIGURED_FEATURE).getOrThrow(v.second).delegate, o.getPlacementsUnsafe(g))
+            o.addPlacedFeatureUnsafe(g, ctx.lookup(PLACED_FEATURE).getOrThrow(v.first))
         } }
+
     }
 
 

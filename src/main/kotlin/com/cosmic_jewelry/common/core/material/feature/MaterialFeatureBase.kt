@@ -1,16 +1,16 @@
 package com.cosmic_jewelry.common.core.material.feature
 
-import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.Material
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.resources.ResourceLocation.parse as loc
 
 abstract class MaterialFeatureBase<M : Material<M>, C, F>(protected val name            : String,
-                                                          private   val materialSymbol  : String = "#") {
+                                                          val materialSymbol  : String = "#") {
 
-    protected val genericName = name.replace(materialSymbol, "material")
-    protected val genericPath = loc("$ID:${genericName}")
+    val genericName = name.replace(materialSymbol, "material")
+    val genericPath = loc("c:${genericName}")
 
-    private val registerMap = HashMap<M, () -> F>()
+    protected val registerMap = HashMap<M, () -> F>()
 
     val content   by lazy { registerMap.mapValues { it.value() }       }
     val users     by lazy { content.map { it.value to it.key }.toMap() }
@@ -30,8 +30,11 @@ abstract class MaterialFeatureBase<M : Material<M>, C, F>(protected val name    
     open fun registerPost(material: M, context: C, feature: () -> F) {}
 
     protected fun createName(material: M) = name.replace(materialSymbol, material.name)
-    protected fun createPath(material: M) = loc("${material.owner}:${createName(material)}")
+    fun createPath(material: M): ResourceLocation = loc("${material.owner}:${createName(material)}")
+
+    @Suppress("UNCHECKED_CAST")
+    fun createPathUnsafe(material: Material<*>) = createPath(material as M)
 
 
-
+    fun createOwnedGenericPathUnsafe(id: String) = loc("$id:$genericName")
 }

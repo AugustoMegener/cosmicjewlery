@@ -15,6 +15,7 @@ import net.neoforged.neoforge.capabilities.Capabilities
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider
 import net.neoforged.neoforge.data.event.GatherDataEvent
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.BIOME_MODIFIERS
 
 
 @EventBusSubscriber(modid = ID, bus = EventBusSubscriber.Bus.MOD)
@@ -49,7 +50,8 @@ object ModCommonEvent {
                     packOutput,
                     event.lookupProvider,
                     RegistrySetBuilder().add(PLACED_FEATURE,     OreGenProvider                 ::bootstrap)
-                                        .add(CONFIGURED_FEATURE, ConfiguredFeatureOreGenProvider::bootstrap),
+                                        .add(CONFIGURED_FEATURE, ConfiguredFeatureOreGenProvider::bootstrap)
+                                        .add(BIOME_MODIFIERS,    BiomeModifierProvider          ::bootstrap),
                     mutableSetOf(ID)
                 )
             )

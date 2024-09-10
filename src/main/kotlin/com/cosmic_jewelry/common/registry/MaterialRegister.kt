@@ -3,7 +3,6 @@ package com.cosmic_jewelry.common.registry
 import com.cosmic_jewelry.common.core.material.Material
 import com.cosmic_jewelry.common.core.material.feature.MaterialBlock
 import com.cosmic_jewelry.common.core.material.feature.MaterialFeatureBase
-import com.cosmic_jewelry.common.core.material.feature.MaterialOre
 import com.cosmic_jewelry.common.core.material.feature.RegistrableMaterialFeature
 import net.minecraft.resources.ResourceLocation.parse
 import net.minecraft.world.item.Item
@@ -37,8 +36,8 @@ object MaterialRegister {
         companion object {
             fun <T: MaterialBlock<M>, M: Material<M>> MaterialBuilder<M>.blockFeature(
                 registerBlock: DeferredRegister<Block>, registerItem : DeferredRegister<Item>, vararg gemFeature : T)
-            {
-              feature(registerBlock, *gemFeature)
+
+            { feature(registerBlock, *gemFeature)
               feature(registerItem, *gemFeature.map { it.item }.toTypedArray()) }
         }
     }

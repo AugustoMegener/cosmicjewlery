@@ -1,7 +1,6 @@
 package com.cosmic_jewelry.common.datagen
 
 import com.cosmic_jewelry.common.core.material.feature.MaterialOre
-import com.cosmic_jewelry.common.core.material.feature.gem.GemOre
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.features.FeatureUtils
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
@@ -12,7 +11,7 @@ object ConfiguredFeatureOreGenProvider {
     fun bootstrap(ctx: BootstrapContext<ConfiguredFeature<*, *>>) {
         MaterialOre.register.forEach { ore ->
             ore.materialConfiguredFeature.forEach { (m, b) ->
-                FeatureUtils.register<OreConfiguration, Feature<OreConfiguration>>(ctx, b, Feature.ORE, ore.getConfig(m))
+                FeatureUtils.register<OreConfiguration, Feature<OreConfiguration>>(ctx, b, Feature.ORE, ore.getConfigUnsafe(m))
             }
         }
     }

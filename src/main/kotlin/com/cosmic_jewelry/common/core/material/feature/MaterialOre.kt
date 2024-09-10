@@ -2,6 +2,7 @@ package com.cosmic_jewelry.common.core.material.feature
 
 import com.cosmic_jewelry.common.core.material.Material
 import com.cosmic_jewelry.common.util.ClassRegister
+import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BlockTags
@@ -15,30 +16,38 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.placement.PlacedFeature
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
+import net.neoforged.neoforge.common.world.BiomeModifier
 import net.neoforged.neoforge.registries.DeferredRegister
 
 abstract class MaterialOre<M: Material<M>>(name: String, tags: List<TagKey<Block>> = listOf(), gemSymbol: String = "#")
     : MaterialBlock<M>(name,tags, gemSymbol), DataGenFeature<BlockStateProvider, M, Block>
 {
     abstract val miningTime: (Float) -> Float
+
     abstract val dropItem: MaterialItem<M>
+    abstract val biomeModifier: BiomeModifier
 
     private val configuredFeatureMap = HashMap<() -> Block, ResourceKey<ConfiguredFeature<*, *>>>()
     val configuredFeatures by lazy { configuredFeatureMap.mapKeys { it.key() } }
 
-    private val placementMap = HashMap<() -> Block, ResourceKey<PlacedFeature>>()
-    val placements by lazy { placementMap.mapKeys { it.key() } }
+    private val placedFeaturesKeysMap = HashMap<() -> Block, ResourceKey<PlacedFeature>>()
+    val placedFeatureKeys by lazy { placedFeaturesKeysMap.mapKeys { it.key() } }
+
+    val placedFeatures = HashMap<M, Holder<PlacedFeature>>()
+
+    @Suppress("UNCHECKED_CAST")
+    fun addPlacedFeatureUnsafe(material: Any, feature: Holder<PlacedFeature>) { placedFeatures[material as M] = feature }
 
     val materialConfiguredFeature     by lazy { users.map { it.value to configuredFeatures[it.key]!! } }
     val placementsToConfiguredFeature by
-        lazy { placements.map { users[it.key]!! to (it.value to configuredFeatures[it.key]!!) } .toMap() }
+        lazy { placedFeatureKeys.map { users[it.key]!! to (it.value to configuredFeatures[it.key]!!) } .toMap() }
 
     init { all += this }
 
     override fun registerPost(material: M, context: DeferredRegister<Block>, feature: () -> Block) {
         super.registerPost(material, context, feature)
 
-        placementMap[feature] = ResourceKey.create(Registries.PLACED_FEATURE, createPath(material))
+        placedFeaturesKeysMap[feature] = ResourceKey.create(Registries.PLACED_FEATURE, createPath(material))
         configuredFeatureMap[feature] = ResourceKey.create(Registries.CONFIGURED_FEATURE, createPath(material))
     }
 
@@ -47,8 +56,9 @@ abstract class MaterialOre<M: Material<M>>(name: String, tags: List<TagKey<Block
     abstract fun <T: M> getConfig(material: T): OreConfiguration
     abstract fun <T: M> getPlacements(material: T): List<PlacementModifier>
 
-    @Suppress("UNCHECKED_CAST") fun getConfig(material: Any) = getConfig(material as M)
-    @Suppress("UNCHECKED_CAST") fun getPlacements(material: Any) = getPlacements(material as M)
+
+    @Suppress("UNCHECKED_CAST") fun getConfigUnsafe(material: Material<*>) = getConfig(material as M)
+    @Suppress("UNCHECKED_CAST") fun getPlacementsUnsafe(material: Material<*>) = getPlacements(material as M)
 
     companion object : ClassRegister<MaterialOre<*>>() {
 

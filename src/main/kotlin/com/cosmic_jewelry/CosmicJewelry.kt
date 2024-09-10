@@ -1,11 +1,9 @@
 package com.cosmic_jewelry
 
-import com.cosmic_jewelry.common.core.material.feature.gem.GemBlock
 import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.cutGemBlockRecipe
 import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemLappingRecipe
 import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemPillarBlockRecipe
 import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemTilesBlockRecipe
-import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.amethystGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.blueQuartzGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.carnelianGem

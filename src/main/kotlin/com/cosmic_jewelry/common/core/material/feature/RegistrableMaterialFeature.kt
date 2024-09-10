@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister
 
 abstract class RegistrableMaterialFeature<M: Material<M>, F>(val registry       : Registry<F>,
                                                                  name           : String,
-                                                             val tags : List<TagKey<F>> = listOf(),
+                                                             val tags           : List<TagKey<F>> = listOf(),
                                                                  materialSymbol : String = "#")
 : MaterialFeatureBase<M, DeferredRegister<F>, F>(name, materialSymbol)
 {
