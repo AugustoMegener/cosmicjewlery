@@ -1,13 +1,13 @@
 {
   "values": [
-    "cosmic_jewelry:amethyst_tiles",
-    "cosmic_jewelry:sapphire_tiles",
     "cosmic_jewelry:blue_quartz_tiles",
+    "cosmic_jewelry:sapphire_tiles",
     "cosmic_jewelry:carnelian_tiles",
-    "cosmic_jewelry:ruby_tiles",
     "cosmic_jewelry:peridot_tiles",
+    "cosmic_jewelry:amethyst_tiles",
+    "cosmic_jewelry:orange_jasper_tiles",
     "cosmic_jewelry:rose_quartz_tiles",
     "cosmic_jewelry:lapis_lazuli_tiles",
-    "cosmic_jewelry:orange_jasper_tiles"
+    "cosmic_jewelry:ruby_tiles"
   ]
 }

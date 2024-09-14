@@ -1,7 +1,9 @@
-// 1.21	2024-08-31T11:31:17.0590872	Registries
+// 1.21	2024-09-13T12:20:07.77451	Registries
+ab3f33a26fe3cc07653ed703b953ebfc01f9626d data/cosmic_jewelry/neoforge/biome_modifier/deepslate_material_ore.json
+e4f86d8d54815933ea2238d95d7b920301f11352 data/cosmic_jewelry/neoforge/biome_modifier/material_ore.json
 487b6a8093d7a83ac5aafa497767bc7544ad9b98 data/cosmic_jewelry/worldgen/configured_feature/deepslate_peridot_ore.json
 1deb07687a8dac67d805b14c907cb37d534875a1 data/cosmic_jewelry/worldgen/configured_feature/ruby_ore.json
 4e916fe40363b94df5080f01b9c9deeea1e5ae5b data/cosmic_jewelry/worldgen/configured_feature/sapphire_ore.json
-fe191eea4d2cee29ba2461e13cf6711d1e66ff6a data/cosmic_jewelry/worldgen/placed_feature/deepslate_peridot_ore.json
+1c582472a8e6783c3198822af04a6de5e0a1102e data/cosmic_jewelry/worldgen/placed_feature/deepslate_peridot_ore.json
 1d328a4ce3442ac7f6274d6a7b0a31476aa4f92d data/cosmic_jewelry/worldgen/placed_feature/ruby_ore.json
 2822d5ccf5a02e77545b9a6f64aaf4ed88b4092e data/cosmic_jewelry/worldgen/placed_feature/sapphire_ore.json

@@ -42,7 +42,9 @@ abstract class MaterialOre<M: Material<M>>(name: String, tags: List<TagKey<Block
     val placementsToConfiguredFeature by
         lazy { placedFeatureKeys.map { users[it.key]!! to (it.value to configuredFeatures[it.key]!!) } .toMap() }
 
-    init { all += this }
+    init {
+        all += this
+    }
 
     override fun registerPost(material: M, context: DeferredRegister<Block>, feature: () -> Block) {
         super.registerPost(material, context, feature)

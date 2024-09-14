@@ -46,5 +46,5 @@ open class GemItem(name: String,
         val ItemStack.cutterMohs: Float? get() = this.item.cutterMohs
     }
 
-    override val featureGeneralTag = TagKey.create(BuiltInRegistries.ITEM.key(), loc("$ID:item"))
+    override val featureGeneralTag = TagKey.create(BuiltInRegistries.ITEM.key(), loc("$ID:gem_item"))
 }

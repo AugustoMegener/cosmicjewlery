@@ -13,6 +13,7 @@ import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.peridotGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.roseQuartzGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.rubyGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.sapphireGem
+import com.cosmic_jewelry.common.registry.BiomeModifierSerializerRegistry.biomeModifierSerializers
 import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.blockEntityTypes
 import com.cosmic_jewelry.common.registry.BlockRegistry.blocks
 import com.cosmic_jewelry.common.registry.BlockRegistry.cutGemBlock
@@ -42,7 +43,7 @@ object CosmicJewelry {
 
     init {
         registerGem()
-        listOf(blocks, items, tabs, blockEntityTypes, menuTypes, recipeTypes, recipeSerializers)
+        listOf(blocks, items, tabs, blockEntityTypes, menuTypes, recipeTypes, recipeSerializers, biomeModifierSerializers)
             .forEach { it.register(MOD_BUS) }
     }
 

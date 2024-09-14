@@ -1,19 +1,19 @@
-// 1.21	2024-09-09T13:10:41.1654912	Tags for minecraft:block mod id cosmic_jewelry
+// 1.21	2024-09-13T12:20:07.7325322	Tags for minecraft:block mod id cosmic_jewelry
 3a1b281718d2f5feb7bdd10658f58fbffe474fe5 data/cosmic_jewelry/tags/block/amethyst_material.json
-ec6b686a10c38ea6881e2020f51a4318b516b211 data/cosmic_jewelry/tags/block/block.json
+34cbdd9268d8eddc38e8bbad17f501e17bb5a587 data/cosmic_jewelry/tags/block/block.json
 c14be79fd788f78b7c3066f564c0ed97d86b5233 data/cosmic_jewelry/tags/block/blue_quartz_material.json
 42019faff69db70b204befdeaa42519e44ea6403 data/cosmic_jewelry/tags/block/carnelian_material.json
 e2b68420db4d69f16e81b2425b55b7746a504977 data/cosmic_jewelry/tags/block/lapis_lazuli_material.json
 e589ce891f9b22fbb8f477abf2d51fb0c7e47b58 data/cosmic_jewelry/tags/block/orange_jasper_material.json
-b6b7361799c6007f18b4ebd6f094917ac6511f3b data/cosmic_jewelry/tags/block/ore.json
+bb05e5953466739c27b8aff0f4c3de34ee2bf34a data/cosmic_jewelry/tags/block/ore.json
 65741966ac2a874ce874040bf7f1b2bbb1d9c3bd data/cosmic_jewelry/tags/block/peridot_material.json
 4cceefa9d27f6e1ec4748cc7f8eb007f23d5515f data/cosmic_jewelry/tags/block/rose_quartz_material.json
 e586b2d64ac23abd62c93412c1eb4b3b8e55f18f data/cosmic_jewelry/tags/block/ruby_material.json
 533a1e2abacf6f3b12fb43423a8d9e7681fed343 data/cosmic_jewelry/tags/block/sapphire_material.json
 840b8988ac1f4bc53b07008f30835648d8348344 data/c/tags/block/deepslate_material_ore.json
-07775622a84de30ed9cd5c6c3cea9f7e2601b3ce data/c/tags/block/material_gem_block.json
-0d6e051277460e27574d3325004527940ccd3781 data/c/tags/block/material_ore.json
-9b55367acbfaa4a5907cba9327f24316ad64bc65 data/c/tags/block/material_pillar.json
-97c891685a5980661a6eff5b224bb6b0a125c76e data/c/tags/block/material_tiles.json
-8dc14abcdf02ee962e4d2aeb840f4999f31b66b6 data/minecraft/tags/block/needs_iron_tool.json
-d6236cd40f3ecc957b43a6665d7a6f0849577a95 data/minecraft/tags/block/needs_stone_tool.json
+307ea040c267b02f18d2ae71ef4852f191bf7ca5 data/c/tags/block/material_gem_block.json
+a2dc1f2f7f88f60c8da5045ecd55ff916c994178 data/c/tags/block/material_ore.json
+ce17f355ed8de78a8b511cab9860535ff2a5b96e data/c/tags/block/material_pillar.json
+b9c6db4c11e60e2e4e2087347f028171d006adeb data/c/tags/block/material_tiles.json
+410c0194dcefaa3425044d7dd616ebd9fb711373 data/minecraft/tags/block/needs_iron_tool.json
+4b536106b48a5dd18906df8e7cfcb1a6bb899ee2 data/minecraft/tags/block/needs_stone_tool.json

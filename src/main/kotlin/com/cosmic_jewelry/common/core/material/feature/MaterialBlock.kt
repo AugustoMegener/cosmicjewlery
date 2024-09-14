@@ -18,7 +18,9 @@ abstract class MaterialBlock<M: Material<M>>(name: String, tags: List<TagKey<Blo
 
     override val featureGeneralTag = TagKey.create(BuiltInRegistries.BLOCK.key(), loc("$ID:block"))
 
-    init { all += this }
+    init {
+        all += this
+    }
 
     override fun getFeature(material: M) = get(material)!!
 

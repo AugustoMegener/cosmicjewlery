@@ -21,8 +21,9 @@ import net.minecraft.resources.ResourceLocation.parse as loc
 
 class GemOre(             name          : String,
              override val miningTime    : (Float) -> Float = { it },
-             override val dataGen       : BlockStateProvider.(GemType, Block) -> Unit = { _, _ -> },
-                          biomeMod      : GemOre.() -> BiomeModifier =
+             override val dataGen       : BlockStateProvider.(GemType, Block) -> Unit =
+                              { _, b -> simpleBlockWithItem(b, cubeAll(b)) },
+                      val biomeMod      : GemOre.() -> BiomeModifier =
                               { TagBiomeModifier(IS_OVERWORLD, HolderSet.direct(*placedFeatures.values.toTypedArray()), UNDERGROUND_ORES)  },
 
                           tags          : List<TagKey<Block>> = listOf(),
@@ -31,7 +32,7 @@ class GemOre(             name          : String,
 {
     override val dropItem = rawGemItem
 
-    override val biomeModifier = biomeMod(this)
+    override val biomeModifier get() = biomeMod(this)
 
     override fun <T : GemType> getPlacements(material: T) = material.family.orePlacements
 

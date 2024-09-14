@@ -33,7 +33,7 @@ class LappingTableBlockEntity(pPos: BlockPos, pBlockState: BlockState)
         override fun getSlotLimit(slot: Int) = if (slot == 0 || slot == 2) 1 else super.getSlotLimit(slot)
 
         override fun onContentsChanged(slot: Int) {
-            this@LappingTableBlockEntity.setChanged()
+            setChanged()
 
             if (slot == 2 || slot == 3) return
 

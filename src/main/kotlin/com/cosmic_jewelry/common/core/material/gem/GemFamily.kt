@@ -53,7 +53,7 @@ class GemFamily(val defaultMosh: Float, val defaultRarity: Rarity, builder: GemF
             miningLevel(ironLevel)
 
             orePlacements(
-                commonOrePlacement(2, triangle(VerticalAnchor.absolute(-32), VerticalAnchor.absolute(-64)))
+                commonOrePlacement(2, triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(-32)))
             )
 
             oreConfiguration {
