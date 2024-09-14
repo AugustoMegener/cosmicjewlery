@@ -2,6 +2,7 @@ package com.cosmic_jewelry.client.renderer.blockentity
 
 import com.cosmic_jewelry.common.world.level.block.entity.BuriedGemBlockEntity
 import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.math.Axis
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.block.BlockRenderDispatcher
@@ -9,7 +10,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.core.Direction
 import net.minecraft.world.item.ItemDisplayContext
-import org.joml.Quaternionf
 import org.joml.Vector3f
 
 
@@ -37,15 +37,27 @@ object BuriedGemRenderer : BlockEntityRenderer<BuriedGemBlockEntity> {
     ) {
         pPoseStack.pushPose()
         blockRenderer.renderSingleBlock(pBlockEntity.block, pPoseStack, pBuffer, pPackedLight, pPackedOverlay)
+        pPoseStack.popPose()
 
+        pPoseStack.pushPose()
         adjustItemRender(pPoseStack, pBlockEntity.gemFacing)
         itemRenderer.renderStatic(pBlockEntity.gem, ItemDisplayContext.GUI, pPackedLight, pPackedOverlay, pPoseStack, pBuffer, pBlockEntity.level, 0)
-        pPoseStack.pushPose()
+        pPoseStack.popPose()
     }
 
     private fun adjustItemRender(poseStack: PoseStack, direction: Direction) {
-        val r = itemRotations[direction]!!
 
-        poseStack.rotateAround(Quaternionf(), r.x, r.y, r.z)
+        /*poseStack.translate(
+            direction.stepX.toDouble() * 0.46875,
+            direction.stepY.toDouble() * 0.46875,
+            direction.stepZ.toDouble() * 0.46875
+        )*/
+
+        val rotation = direction.rotation
+
+        poseStack.translate(-0.5f, -0.5f, -0.5f)
+        poseStack.mulPose(Axis.XP.rotationDegrees(rotation.x))
+        poseStack.mulPose(Axis.ZP.rotationDegrees(rotation.z * 360.0f / 8.0f))
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0f - rotation.y))
     }
 }
