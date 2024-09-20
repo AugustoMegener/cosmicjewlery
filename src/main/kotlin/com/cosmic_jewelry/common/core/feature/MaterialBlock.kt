@@ -1,4 +1,4 @@
-package com.cosmic_jewelry.common.core.material.feature
+package com.cosmic_jewelry.common.core.feature
 
 import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.Material
@@ -16,11 +16,10 @@ abstract class MaterialBlock<M: Material<M>>(name: String, tags: List<TagKey<Blo
 {
     abstract val item: MaterialItem<M>
 
-    override val featureGeneralTag = TagKey.create(BuiltInRegistries.BLOCK.key(), loc("$ID:block"))
+    override val featureGeneralTag: TagKey<Block> =
+        TagKey.create(BuiltInRegistries.BLOCK.key(), loc("$ID:block"))
 
-    init {
-        all += this
-    }
+    init { all += this }
 
     override fun getFeature(material: M) = get(material)!!
 

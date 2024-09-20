@@ -4,7 +4,7 @@ package com.cosmic_jewelry.common.registry
 
 import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.peridotGem
-import com.cosmic_jewelry.common.core.material.feature.gem.GemItem
+import com.cosmic_jewelry.common.core.feature.gem.GemItem
 import com.cosmic_jewelry.common.registry.ItemRegistry.cutGemItem
 import com.cosmic_jewelry.common.registry.ItemRegistry.lappingTableBlockItem
 import net.minecraft.core.registries.Registries

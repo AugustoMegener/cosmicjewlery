@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cosmic_jewelry:item/yellow_essence_bucket"
+  }
+}

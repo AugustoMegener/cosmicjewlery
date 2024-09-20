@@ -1,6 +1,6 @@
-package com.cosmic_jewelry.common.core.material.feature.gem
+package com.cosmic_jewelry.common.core.feature.gem
 
-import com.cosmic_jewelry.common.core.material.feature.MaterialBlock
+import com.cosmic_jewelry.common.core.feature.MaterialBlock
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.util.ClassRegister
 import net.minecraft.tags.TagKey

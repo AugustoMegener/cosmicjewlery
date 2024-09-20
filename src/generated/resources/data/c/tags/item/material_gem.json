@@ -1,13 +1,13 @@
 {
   "values": [
-    "cosmic_jewelry:blue_quartz_gem",
-    "cosmic_jewelry:sapphire_gem",
-    "cosmic_jewelry:carnelian_gem",
-    "cosmic_jewelry:peridot_gem",
-    "cosmic_jewelry:amethyst_gem",
-    "cosmic_jewelry:orange_jasper_gem",
     "cosmic_jewelry:rose_quartz_gem",
+    "cosmic_jewelry:ruby_gem",
     "cosmic_jewelry:lapis_lazuli_gem",
-    "cosmic_jewelry:ruby_gem"
+    "cosmic_jewelry:blue_quartz_gem",
+    "cosmic_jewelry:peridot_gem",
+    "cosmic_jewelry:orange_jasper_gem",
+    "cosmic_jewelry:sapphire_gem",
+    "cosmic_jewelry:amethyst_gem",
+    "cosmic_jewelry:carnelian_gem"
   ]
 }

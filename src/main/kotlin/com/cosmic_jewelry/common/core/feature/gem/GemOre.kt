@@ -1,8 +1,8 @@
-package com.cosmic_jewelry.common.core.material.feature.gem
+package com.cosmic_jewelry.common.core.feature.gem
 
 import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.common.core.material.feature.DataGenFeature
-import com.cosmic_jewelry.common.core.material.feature.MaterialOre
+import com.cosmic_jewelry.common.core.feature.DataGenFeature
+import com.cosmic_jewelry.common.core.feature.MaterialOre
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.registry.ItemRegistry.rawGemItem
 import com.cosmic_jewelry.common.world.TagBiomeModifier
@@ -40,5 +40,6 @@ class GemOre(             name          : String,
 
     override fun <T : GemType> getConfig(material: T): OreConfiguration = material.family.oreConfiguration(material)
 
-    override val featureGeneralTag = TagKey.create(BuiltInRegistries.BLOCK.key(), loc("$ID:ore"))
+    override val featureGeneralTag: TagKey<Block> =
+        TagKey.create(BuiltInRegistries.BLOCK.key(), loc("$ID:ore"))
 }

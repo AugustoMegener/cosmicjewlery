@@ -2,9 +2,9 @@ package com.cosmic_jewelry.common.core.material.gem
 
 
 
-import com.cosmic_jewelry.common.core.material.feature.MaterialOre
-import com.cosmic_jewelry.common.core.material.feature.MaterialOre.Companion.MiningLevel.Companion.ironLevel
-import com.cosmic_jewelry.common.core.material.feature.MaterialOre.Companion.MiningLevel.Companion.stoneLevel
+import com.cosmic_jewelry.common.core.feature.MaterialOre
+import com.cosmic_jewelry.common.core.feature.MaterialOre.Companion.MiningLevel.Companion.ironLevel
+import com.cosmic_jewelry.common.core.feature.MaterialOre.Companion.MiningLevel.Companion.stoneLevel
 import com.cosmic_jewelry.common.datagen.OreGenProvider.commonOrePlacement
 import com.cosmic_jewelry.common.registry.BlockRegistry.deepslateGemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.gemOreBlock
@@ -46,10 +46,12 @@ class GemFamily(val defaultMosh: Float, val defaultRarity: Rarity, builder: GemF
         val stoneReplaceRule = TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES)
         val slateReplaceRule = TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
 
-        val quartzFamily   = GemFamily(7.0f, Rarity.COMMON)   { }
-        val silicateFamily = GemFamily(5.5f, Rarity.UNCOMMON) { }
+        val  diamondFamily = GemFamily(10f,  Rarity.EPIC) {}
 
-        val olivineFamily  = GemFamily(6.5f, Rarity.UNCOMMON) {
+        val   quartzFamily = GemFamily(7.0f, Rarity.COMMON)   {}
+        val silicateFamily = GemFamily(5.5f, Rarity.UNCOMMON) {}
+
+        val  olivineFamily = GemFamily(6.5f, Rarity.UNCOMMON) {
             miningLevel(ironLevel)
 
             orePlacements(

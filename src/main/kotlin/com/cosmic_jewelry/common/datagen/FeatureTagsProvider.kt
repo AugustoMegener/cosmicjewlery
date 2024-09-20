@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.common.datagen
 
-import com.cosmic_jewelry.common.core.material.feature.RegistrableMaterialFeature
+import com.cosmic_jewelry.common.core.feature.RegistrableMaterialFeature
 import com.cosmic_jewelry.common.util.ClassRegister
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.Registry

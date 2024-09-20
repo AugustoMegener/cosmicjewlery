@@ -1,6 +1,7 @@
 package com.cosmic_jewelry.common.registry
 
 import com.cosmic_jewelry.CosmicJewelry.ID
+import com.cosmic_jewelry.common.registry.BlockRegistry.buriedGemBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.lappingTableBlock
 import com.cosmic_jewelry.common.world.level.block.entity.BuriedGemBlockEntity
 import com.cosmic_jewelry.common.world.level.block.entity.LappingTableBlockEntity
@@ -20,7 +21,7 @@ object BlockEntityTypeRegistry {
         }
 
     val buriedGemBlockEntityType: BlockEntityType<BuriedGemBlockEntity> by
-        blockEntityTypes.register("burried_gem") { ->
-            BlockEntityType.Builder.of({ p, s -> BuriedGemBlockEntity(p, s) }, lappingTableBlock).build(null)
+        blockEntityTypes.register("buried_gem") { ->
+            BlockEntityType.Builder.of({ p, s -> BuriedGemBlockEntity(p, s) }, buriedGemBlock).build(null)
         }
 }

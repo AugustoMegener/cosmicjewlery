@@ -17,7 +17,7 @@ object RecipeRegistry {
         RecipeType.register<LappingRecipe>("lapping")
     }
 
-    val lappingRecipeSerializer by recipeSerializers.register("lapping") { ->
+    val lappingRecipeSerializer by recipeSerializers.register("lapping_serializer") { ->
         RecipeSerializer.register("lapping", LappingRecipe)
     }
 }

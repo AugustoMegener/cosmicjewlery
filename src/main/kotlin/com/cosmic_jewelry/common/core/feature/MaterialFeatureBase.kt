@@ -1,10 +1,10 @@
-package com.cosmic_jewelry.common.core.material.feature
+package com.cosmic_jewelry.common.core.feature
 
 import com.cosmic_jewelry.common.core.material.Material
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.resources.ResourceLocation.parse as loc
 
-abstract class MaterialFeatureBase<M : Material<M>, C, F>(protected val name            : String,
+abstract class MaterialFeatureBase<M : Material<M>, C, F>(val name            : String,
                                                           val materialSymbol  : String = "#") {
 
     val genericName = name.replace(materialSymbol, "material")

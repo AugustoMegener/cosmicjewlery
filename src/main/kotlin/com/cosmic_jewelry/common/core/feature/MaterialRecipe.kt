@@ -1,4 +1,4 @@
-package com.cosmic_jewelry.common.core.material.feature
+package com.cosmic_jewelry.common.core.feature
 
 import com.cosmic_jewelry.common.core.material.Material
 import net.minecraft.data.recipes.RecipeOutput

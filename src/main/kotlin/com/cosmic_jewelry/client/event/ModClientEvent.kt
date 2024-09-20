@@ -22,6 +22,7 @@ object ModClientEvent {
         event.register(lappingTableMenu) { m, i, n -> LappingTableScreen(m, i, n) }
     }
 
+    @SubscribeEvent
     fun onRegisterRenderers(event: EntityRenderersEvent.RegisterRenderers) {
         event.registerBlockEntityRenderer(buriedGemBlockEntityType) { BuriedGemRenderer }
     }

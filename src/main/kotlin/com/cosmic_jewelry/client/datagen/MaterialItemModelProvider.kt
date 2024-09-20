@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.client.datagen
 
-import com.cosmic_jewelry.common.core.material.feature.MaterialItem
+import com.cosmic_jewelry.common.core.feature.MaterialItem
 import net.minecraft.data.PackOutput
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider
 import net.neoforged.neoforge.common.data.ExistingFileHelper

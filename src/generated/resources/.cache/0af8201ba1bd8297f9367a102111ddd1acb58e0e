@@ -1,18 +1,25 @@
-// 1.21	2024-09-13T12:20:07.7615152	Tags for minecraft:item mod id cosmic_jewelry
+// 1.21	2024-09-18T13:46:22.602516	Tags for minecraft:item mod id cosmic_jewelry
 ea217d1cac68a4d235d1b240bffcf0ad0fd6911b data/cosmic_jewelry/tags/item/amethyst_material.json
+c8fece53b24a11ad4c15827ee2ae1b56d0bd1bc7 data/cosmic_jewelry/tags/item/blue_essence_material.json
 eef639b11797665b9035223c9351ea5936e37dbd data/cosmic_jewelry/tags/item/blue_quartz_material.json
 c1506b4d1cf880fa71cfeeb5bf8f08e4e69faa12 data/cosmic_jewelry/tags/item/carnelian_material.json
-0d01cdcb568d8f32708c187959570e24dcd4fe60 data/cosmic_jewelry/tags/item/item.json
+be773aec43b670f45944f2905d48ed7e1c015b74 data/cosmic_jewelry/tags/item/item.json
 1e62c5eaa1bff4629b7f6142b83e3b0d429fa351 data/cosmic_jewelry/tags/item/lapis_lazuli_material.json
 9fd98270022caa060286008594450dfa79a636e4 data/cosmic_jewelry/tags/item/orange_jasper_material.json
 31d1b064efd212527f46175efb2584d9f8db1dc5 data/cosmic_jewelry/tags/item/peridot_material.json
+32fd5bac81f148c20697bff94973c8e1f3d61fcc data/cosmic_jewelry/tags/item/pink_essence_material.json
 119a91abd1e8ed5121124f20467d77e269867bef data/cosmic_jewelry/tags/item/rose_quartz_material.json
 31acdaba4aa56409a0dab6f33fc1358df20d5209 data/cosmic_jewelry/tags/item/ruby_material.json
 5e056562a2b15121b9bab0c6c3e0e3a55c070857 data/cosmic_jewelry/tags/item/sapphire_material.json
+b5d7936d0cf4c9716125473a051bab41ebafc0d7 data/cosmic_jewelry/tags/item/white_essence_material.json
+1072796f28b86855e5fa2550212f96dcfaec308e data/cosmic_jewelry/tags/item/yellow_essence_material.json
 840b8988ac1f4bc53b07008f30835648d8348344 data/c/tags/item/deepslate_material_ore.json
-8f537c7ee36b8ece6500c84f20741199229cec07 data/c/tags/item/material_gem.json
-307ea040c267b02f18d2ae71ef4852f191bf7ca5 data/c/tags/item/material_gem_block.json
-a2dc1f2f7f88f60c8da5045ecd55ff916c994178 data/c/tags/item/material_ore.json
-ce17f355ed8de78a8b511cab9860535ff2a5b96e data/c/tags/item/material_pillar.json
-b9c6db4c11e60e2e4e2087347f028171d006adeb data/c/tags/item/material_tiles.json
-2780fbbe70bb49f46218e48e9a08e1dd46cd6420 data/c/tags/item/uncut_material_gem.json
+e385aeb7134e0c9c9b04cae0d59ae05023e518ff data/c/tags/item/material.json
+d654d7d2303d792f32869c3c205f446febecf52f data/c/tags/item/material_bucket.json
+b0ebffbae7075494545e44aa043830bfc10b678d data/c/tags/item/material_gem.json
+3bb4b7962cc7ca51bbc551957b807ca94887134a data/c/tags/item/material_gem_block.json
+f0b1e11c720414d69c25eedc8d713f53c3231019 data/c/tags/item/material_jar.json
+0d6e051277460e27574d3325004527940ccd3781 data/c/tags/item/material_ore.json
+f7d6308450d9e06954f16e0d89d7455158f9545b data/c/tags/item/material_pillar.json
+55dae61d9add7ec7af78aba1430bc920acbc6796 data/c/tags/item/material_tiles.json
+81d5786cf40035f8326f1f0c30abe7da236a7a8f data/c/tags/item/uncut_material_gem.json

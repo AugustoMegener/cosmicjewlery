@@ -1,7 +1,7 @@
 package com.cosmic_jewelry.common.datagen
 
 import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.common.core.material.feature.MaterialOre
+import com.cosmic_jewelry.common.core.feature.MaterialOre
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
 import net.neoforged.neoforge.common.world.BiomeModifier

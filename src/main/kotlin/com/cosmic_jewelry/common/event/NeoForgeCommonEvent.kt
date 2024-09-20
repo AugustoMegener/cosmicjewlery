@@ -1,7 +1,7 @@
 package com.cosmic_jewelry.common.event
 
 import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.common.core.material.feature.gem.GemItem
+import com.cosmic_jewelry.common.core.feature.gem.GemItem
 import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.buriedGemBlockEntityType
 import com.cosmic_jewelry.common.registry.BlockRegistry.buriedGemBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.buryableBlockTag
@@ -40,6 +40,6 @@ object NeoForgeCommonEvent {
 
         level.getBlockEntity(pos, buriedGemBlockEntityType).get().apply { block     = state
                                                                           gem       = item.split(1)
-                                                                          gemFacing = player.direction }
+                                                                          gemFacing = player.direction.opposite }
     }
 }

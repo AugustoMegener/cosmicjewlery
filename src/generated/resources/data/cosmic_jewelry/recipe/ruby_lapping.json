@@ -1,5 +1,5 @@
 {
-  "type": "cosmic_jewelry:lapping",
+  "type": "cosmic_jewelry:lapping_serializer",
   "input": {
     "item": "cosmic_jewelry:uncut_ruby_gem"
   },

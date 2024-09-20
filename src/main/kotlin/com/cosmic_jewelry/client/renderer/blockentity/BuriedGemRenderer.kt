@@ -9,23 +9,24 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.core.Direction
+import net.minecraft.core.Direction.*
 import net.minecraft.world.item.ItemDisplayContext
 import org.joml.Vector3f
 
 
 object BuriedGemRenderer : BlockEntityRenderer<BuriedGemBlockEntity> {
 
+    private val translates = mapOf(SOUTH to Vector3f(0.5f,  0.5f,  1.01f ),
+                                   NORTH to Vector3f(0.5f,   0.5f, -0.01f),
+                                   WEST  to Vector3f(-0.01f, 0.5f, 0.5f  ),
+                                   EAST  to Vector3f(1.01f,  0.5f, 0.5f  ))
+
+    private val mulPoses = mapOf(NORTH to Axis.YP.rotationDegrees(180f),
+                                 WEST  to Axis.YP.rotationDegrees(90f),
+                                 EAST  to Axis.YP.rotationDegrees(-90f))
+
     private val blockRenderer: BlockRenderDispatcher by lazy { Minecraft.getInstance().blockRenderer }
     private val itemRenderer :          ItemRenderer by lazy { Minecraft.getInstance().itemRenderer  }
-
-    private val itemRotations = mapOf(
-        Direction.NORTH to Vector3f(0f,   0f,   0f),
-        Direction.SOUTH to Vector3f(0f, 180f, 0f),
-        Direction.WEST  to Vector3f(0f, 270f, 0f),
-        Direction.EAST  to Vector3f(0f, 90f, 0f),
-        Direction.UP    to Vector3f(90f, 0f, 0f),
-        Direction.DOWN  to Vector3f(-90f, 0f,   0f))
-
 
 
     override fun render(  pBlockEntity : BuriedGemBlockEntity,
@@ -47,17 +48,9 @@ object BuriedGemRenderer : BlockEntityRenderer<BuriedGemBlockEntity> {
 
     private fun adjustItemRender(poseStack: PoseStack, direction: Direction) {
 
-        /*poseStack.translate(
-            direction.stepX.toDouble() * 0.46875,
-            direction.stepY.toDouble() * 0.46875,
-            direction.stepZ.toDouble() * 0.46875
-        )*/
-
         val rotation = direction.rotation
 
-        poseStack.translate(-0.5f, -0.5f, -0.5f)
-        poseStack.mulPose(Axis.XP.rotationDegrees(rotation.x))
-        poseStack.mulPose(Axis.ZP.rotationDegrees(rotation.z * 360.0f / 8.0f))
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0f - rotation.y))
+        translates[direction]?.run { poseStack.translate(x, y, z) }
+        mulPoses[direction]?.also { poseStack.mulPose(it) }
     }
 }

@@ -1,8 +1,8 @@
 package com.cosmic_jewelry.common.registry
 
 import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.common.core.material.feature.gem.GemBlock
-import com.cosmic_jewelry.common.core.material.feature.gem.GemOre
+import com.cosmic_jewelry.common.core.feature.gem.GemBlock
+import com.cosmic_jewelry.common.core.feature.gem.GemOre
 import com.cosmic_jewelry.common.world.level.block.BuriedGemBlock
 import com.cosmic_jewelry.common.world.level.block.LappingTableBlock
 import net.minecraft.core.registries.BuiltInRegistries

@@ -2,16 +2,21 @@ package com.cosmic_jewelry.common.core.material
 
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.resources.ResourceLocation.parse as loc
 import net.minecraft.tags.TagKey
-import java.lang.reflect.GenericDeclaration
-import java.lang.reflect.TypeVariable
+import net.minecraft.world.item.Rarity
+import net.minecraft.resources.ResourceLocation.parse as loc
 
 interface Material<T: Material<T>> {
-    val name: String
-    val owner: String
+
+    val location: ResourceLocation
+
+    val  name : String get() = location.path
+    val owner : String get() = location.namespace
+
+    val rarity: Rarity
 
     val mohs: Float
+
 
     val registry: HashMap<ResourceLocation, T>
 

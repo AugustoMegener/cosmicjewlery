@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.storage.loot.LootParams
 import net.neoforged.neoforge.items.ItemStackHandler
-import net.minecraft.core.Direction.CODEC as DirCodec
 import net.minecraft.nbt.NbtOps.INSTANCE as NbtOps
 import net.minecraft.world.level.block.state.BlockState.CODEC as BlockStateCodec
 
@@ -23,8 +22,10 @@ class BuriedGemBlockEntity(pPos: BlockPos, pBlockState: BlockState)
     : BlockEntity(buriedGemBlockEntityType, pPos, pBlockState)
 {
     var block: BlockState = STONE.defaultBlockState()
+        set(value) { field = value; setChanged() }
     var gem get() = inventory[0]; set(value) { inventory.setStackInSlot(0, value) }
     var gemFacing = Direction.NORTH
+        set(value) { field = value; setChanged() }
 
     private val inventory: ItemStackHandler =
     object : ItemStackHandler(1)
@@ -42,14 +43,16 @@ class BuriedGemBlockEntity(pPos: BlockPos, pBlockState: BlockState)
     override fun saveAdditional(pTag: CompoundTag, pRegistries: HolderLookup.Provider)
     { pTag.put("block",     BlockStateCodec.encodeStart(NbtOps, block).orThrow)
       pTag.put("inventory", inventory.serializeNBT(pRegistries))
-      pTag.put("facing",    DirCodec.encodeStart(NbtOps, gemFacing).orThrow)
+      pTag.putString("facing", gemFacing.name)
 
       super.saveAdditional(pTag, pRegistries) }
 
     override fun loadAdditional(pTag: CompoundTag, pRegistries: HolderLookup.Provider)
     { block = BlockStateCodec.parse(NbtOps, pTag.getCompound("block")).orThrow
       inventory.deserializeNBT(pRegistries, pTag.getCompound("inventory"))
-      gemFacing = DirCodec.parse(NbtOps, pTag.getCompound("facing")).orThrow
+      gemFacing = Direction.valueOf(pTag.getString("facing"))
 
       super.loadAdditional(pTag, pRegistries) }
+
+
 }

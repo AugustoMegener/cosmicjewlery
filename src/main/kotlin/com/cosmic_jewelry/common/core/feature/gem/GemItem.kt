@@ -1,16 +1,13 @@
-package com.cosmic_jewelry.common.core.material.feature.gem
+package com.cosmic_jewelry.common.core.feature.gem
 
-import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.common.core.material.feature.MaterialItem
+import com.cosmic_jewelry.common.core.feature.MaterialItem
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.util.ClassRegister
-import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider
 import net.neoforged.neoforge.registries.DeferredRegister
-import net.minecraft.resources.ResourceLocation.parse as loc
 
 open class GemItem(name: String,
                    override val featureBuilder: (GemType) -> Item = { Item(Item.Properties().rarity(it.rarity)) },
@@ -28,8 +25,6 @@ open class GemItem(name: String,
         if (doLapping) cuttersRegisters[feature] = material.mohs
     }
 
-    override fun getFeature(material: GemType) = get(material)!!
-
     companion object : ClassRegister<GemItem>() {
         val defaultProperty = { it: GemType -> Item.Properties().rarity(it.rarity) }
 
@@ -45,6 +40,4 @@ open class GemItem(name: String,
         val Item.cutterMohs: Float? get() = cuttersMohsMap[this]
         val ItemStack.cutterMohs: Float? get() = this.item.cutterMohs
     }
-
-    override val featureGeneralTag = TagKey.create(BuiltInRegistries.ITEM.key(), loc("$ID:gem_item"))
 }

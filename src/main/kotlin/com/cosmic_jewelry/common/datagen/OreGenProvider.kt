@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.common.datagen
 
-import com.cosmic_jewelry.common.core.material.feature.MaterialOre
+import com.cosmic_jewelry.common.core.feature.MaterialOre
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.Registries.CONFIGURED_FEATURE
 import net.minecraft.core.registries.Registries.PLACED_FEATURE

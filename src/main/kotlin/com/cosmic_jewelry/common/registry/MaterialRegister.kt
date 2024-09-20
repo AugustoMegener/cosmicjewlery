@@ -1,12 +1,15 @@
 package com.cosmic_jewelry.common.registry
 
+import com.cosmic_jewelry.common.core.feature.MaterialBlock
+import com.cosmic_jewelry.common.core.feature.MaterialFeatureBase
+import com.cosmic_jewelry.common.core.feature.MaterialFluidType
+import com.cosmic_jewelry.common.core.feature.RegistrableMaterialFeature
 import com.cosmic_jewelry.common.core.material.Material
-import com.cosmic_jewelry.common.core.material.feature.MaterialBlock
-import com.cosmic_jewelry.common.core.material.feature.MaterialFeatureBase
-import com.cosmic_jewelry.common.core.material.feature.RegistrableMaterialFeature
 import net.minecraft.resources.ResourceLocation.parse
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.material.Fluid
+import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.registries.DeferredRegister
 
 object MaterialRegister {
@@ -39,6 +42,19 @@ object MaterialRegister {
 
             { feature(registerBlock, *gemFeature)
               feature(registerItem, *gemFeature.map { it.item }.toTypedArray()) }
+
+            fun <T: MaterialFluidType<M>, M: Material<M>> MaterialBuilder<M>.fluidTypeFeature(
+                registerFluidType : DeferredRegister<FluidType>,
+                    registerFluid : DeferredRegister<Fluid>,
+                    registerBlock : DeferredRegister<Block>,
+                     registerItem : DeferredRegister<Item>,
+                vararg feature : T
+            ) {
+                feature(registerFluidType, *feature)
+                feature(registerFluid, *feature.flatMap { listOf(it.sourceFluid, it.flowingFluid) }.toTypedArray())
+                feature(registerItem, *feature.map { it.bucket }.toTypedArray())
+                blockFeature(registerBlock, registerItem, *feature.map { it.block }.toTypedArray())
+            }
         }
     }
 

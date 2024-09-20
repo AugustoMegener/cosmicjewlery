@@ -1,8 +1,8 @@
 package com.cosmic_jewelry.common.event
 
 import com.cosmic_jewelry.CosmicJewelry.ID
-import com.cosmic_jewelry.common.core.material.feature.MaterialBlock
-import com.cosmic_jewelry.common.core.material.feature.MaterialItem
+import com.cosmic_jewelry.common.core.feature.MaterialBlock
+import com.cosmic_jewelry.common.core.feature.MaterialItem
 import com.cosmic_jewelry.common.datagen.*
 import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.lappingTableBlockEntityType
 import net.minecraft.core.RegistrySetBuilder

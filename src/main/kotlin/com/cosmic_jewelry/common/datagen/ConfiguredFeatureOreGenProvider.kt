@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.common.datagen
 
-import com.cosmic_jewelry.common.core.material.feature.MaterialOre
+import com.cosmic_jewelry.common.core.feature.MaterialOre
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.features.FeatureUtils
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature

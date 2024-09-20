@@ -2,8 +2,8 @@
   "type": "cosmic_jewelry:tag_biome_modifier",
   "biomes": "c:is_overworld",
   "features": [
-    "cosmic_jewelry:sapphire_ore",
-    "cosmic_jewelry:ruby_ore"
+    "cosmic_jewelry:ruby_ore",
+    "cosmic_jewelry:sapphire_ore"
   ],
   "step": "underground_ores"
 }

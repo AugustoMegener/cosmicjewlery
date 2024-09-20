@@ -1,9 +1,13 @@
 package com.cosmic_jewelry
 
-import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.cutGemBlockRecipe
-import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemLappingRecipe
-import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemPillarBlockRecipe
-import com.cosmic_jewelry.common.core.material.feature.gem.GemRecipe.Companion.gemTilesBlockRecipe
+import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.cutGemBlockRecipe
+import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemLappingRecipe
+import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemPillarBlockRecipe
+import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemTilesBlockRecipe
+import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.blueEssence
+import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.pinkEssence
+import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.whiteEssence
+import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.yellowEssence
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.amethystGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.blueQuartzGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.carnelianGem
@@ -21,11 +25,16 @@ import com.cosmic_jewelry.common.registry.BlockRegistry.deepslateGemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.gemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.pillarBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.tilesBlock
+import com.cosmic_jewelry.common.registry.FluidRegistry.fluids
+import com.cosmic_jewelry.common.registry.FluidTypeRegistry.essenceFluidType
+import com.cosmic_jewelry.common.registry.FluidTypeRegistry.fluidTypes
 import com.cosmic_jewelry.common.registry.ItemRegistry.cutGemItem
+import com.cosmic_jewelry.common.registry.ItemRegistry.essenceJarItem
 import com.cosmic_jewelry.common.registry.ItemRegistry.items
 import com.cosmic_jewelry.common.registry.ItemRegistry.rawGemItem
 import com.cosmic_jewelry.common.registry.MaterialRegister
 import com.cosmic_jewelry.common.registry.MaterialRegister.MaterialBuilder.Companion.blockFeature
+import com.cosmic_jewelry.common.registry.MaterialRegister.MaterialBuilder.Companion.fluidTypeFeature
 import com.cosmic_jewelry.common.registry.MenuTypeRegistry.menuTypes
 import com.cosmic_jewelry.common.registry.RecipeRegistry.recipeSerializers
 import com.cosmic_jewelry.common.registry.RecipeRegistry.recipeTypes
@@ -42,24 +51,23 @@ object CosmicJewelry {
     val logger: Logger = LogManager.getLogger(ID)
 
     init {
-        registerGem()
-        listOf(blocks, items, tabs, blockEntityTypes, menuTypes, recipeTypes, recipeSerializers, biomeModifierSerializers)
+        registerMaterial()
+        listOf(blocks, items, tabs, blockEntityTypes, menuTypes, recipeTypes, recipeSerializers,
+               biomeModifierSerializers, fluids, fluidTypes)
             .forEach { it.register(MOD_BUS) }
     }
 
-    private fun registerGem() {
+    private fun registerMaterial() {
         MaterialRegister(ID) {
-            addMaterial(
-                "peridot"       to peridotGem,
-                "amethyst"      to amethystGem,
-                "blue_quartz"   to blueQuartzGem,
-                "carnelian"     to carnelianGem,
-                "lapis_lazuli"  to lapisLazuliGem,
-                "orange_jasper" to orangeJasperGem,
-                "rose_quartz"   to roseQuartzGem,
-                "ruby"          to rubyGem,
-                "sapphire"      to sapphireGem
-            )
+            addMaterial(      "peridot" to peridotGem,
+                             "amethyst" to amethystGem,
+                          "blue_quartz" to blueQuartzGem,
+                            "carnelian" to carnelianGem,
+                         "lapis_lazuli" to lapisLazuliGem,
+                        "orange_jasper" to orangeJasperGem,
+                          "rose_quartz" to roseQuartzGem,
+                                 "ruby" to rubyGem,
+                             "sapphire" to sapphireGem     )
             {
                 blockFeature(blocks, items,
                     cutGemBlock, tilesBlock, pillarBlock)
@@ -79,6 +87,16 @@ object CosmicJewelry {
             addFeatures(rubyGem, sapphireGem, peridotGem) {
                 feature(items, rawGemItem)
                 feature(gemLappingRecipe)
+            }
+
+            addMaterial( "white_essence" to whiteEssence,
+                        "yellow_essence" to yellowEssence,
+                          "blue_essence" to blueEssence,
+                          "pink_essence" to pinkEssence   )
+            {
+                fluidTypeFeature(fluidTypes, fluids, blocks, items,
+                    essenceFluidType)
+                feature(items, essenceJarItem)
             }
         }
     }

@@ -1,6 +1,6 @@
-package com.cosmic_jewelry.common.core.material.feature.gem
+package com.cosmic_jewelry.common.core.feature.gem
 
-import com.cosmic_jewelry.common.core.material.feature.MaterialRecipe
+import com.cosmic_jewelry.common.core.feature.MaterialRecipe
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.registry.BlockRegistry.cutGemBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.pillarBlock
@@ -15,7 +15,6 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.data.recipes.*
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.resources.ResourceLocation.parse
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
