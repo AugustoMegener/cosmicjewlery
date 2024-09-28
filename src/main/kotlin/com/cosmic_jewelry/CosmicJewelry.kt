@@ -4,10 +4,7 @@ import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.cutGemBloc
 import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemLappingRecipe
 import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemPillarBlockRecipe
 import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemTilesBlockRecipe
-import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.blueEssence
-import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.pinkEssence
 import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.whiteEssence
-import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.yellowEssence
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.amethystGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.blueQuartzGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.carnelianGem
@@ -90,9 +87,9 @@ object CosmicJewelry {
             }
 
             addMaterial( "white_essence" to whiteEssence,
-                        "yellow_essence" to yellowEssence,
+                        /*"yellow_essence" to yellowEssence,
                           "blue_essence" to blueEssence,
-                          "pink_essence" to pinkEssence   )
+                          "pink_essence" to pinkEssence*/   )
             {
                 fluidTypeFeature(fluidTypes, fluids, blocks, items,
                     essenceFluidType)

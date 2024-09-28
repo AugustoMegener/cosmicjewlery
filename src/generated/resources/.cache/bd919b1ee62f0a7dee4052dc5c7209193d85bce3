@@ -1,4 +1,4 @@
-// 1.21	2024-09-13T12:16:37.3254537	Block States: cosmic_jewelry
+// 1.21	2024-09-26T21:27:51.8716966	Block States: cosmic_jewelry
 d13926a3d2340edb40515649f6027622388cf520 assets/cosmic_jewelry/blockstates/amethyst_gem_block.json
 11ac3f14f598c5df5757391d881ec29bffdb9ed5 assets/cosmic_jewelry/blockstates/amethyst_pillar.json
 114bf74d49a65949caaf9ecf0ae4e9db0f508dd6 assets/cosmic_jewelry/blockstates/amethyst_tiles.json
@@ -29,6 +29,7 @@ d38062c9b2b5d3974abd20ceefb224f277429386 assets/cosmic_jewelry/blockstates/sapph
 bf23db1d2d67e984c27708bba22bae40eca33f01 assets/cosmic_jewelry/blockstates/sapphire_ore.json
 1dcb1fc6da82b394b0f0da66c94d1a6189cfabc5 assets/cosmic_jewelry/blockstates/sapphire_pillar.json
 096068c26c59ab0abb280c3f2f21ebb0398d3781 assets/cosmic_jewelry/blockstates/sapphire_tiles.json
+673d8ce0dec203651a47dfeb1fe579a1541c5371 assets/cosmic_jewelry/blockstates/white_essence.json
 eed21f983a831188a90430ba160d985d3ae76c5a assets/cosmic_jewelry/models/block/amethyst_gem_block.json
 c610702ad776482be2832c60fda49e4fef993eef assets/cosmic_jewelry/models/block/amethyst_pillar.json
 b2f53ac0e2f05a3cd2b3a9c9c1d60c2a65bc4a5b assets/cosmic_jewelry/models/block/amethyst_pillar_horizontal.json
@@ -68,6 +69,7 @@ d35d634fbdec4834e53e3c0b962a8811d273221e assets/cosmic_jewelry/models/block/rose
 12fd3c791857fcdf67e8fb98e93009b2eced7ecb assets/cosmic_jewelry/models/block/sapphire_pillar.json
 4b212c4ec4d60682c389180e5ef8c89572af7bf7 assets/cosmic_jewelry/models/block/sapphire_pillar_horizontal.json
 037c85f07972ab88243ce5035a59f059ed09c45e assets/cosmic_jewelry/models/block/sapphire_tiles.json
+f05dd2e4f11fe0a237dcd0a1357f6236ad50429f assets/cosmic_jewelry/models/block/white_essence.json
 67e3b2bc53822b487e37df9813190e1d4ff56e54 assets/cosmic_jewelry/models/item/amethyst_gem_block.json
 f3df2860da346075d9378f9802da30aaea8b32a0 assets/cosmic_jewelry/models/item/amethyst_pillar.json
 4c4a1e22cba3c7cc29c8ca70fd4174012fa7cb3a assets/cosmic_jewelry/models/item/amethyst_tiles.json
@@ -98,3 +100,4 @@ b774f76caf375d63b4898e77e71be534f03a3617 assets/cosmic_jewelry/models/item/sapph
 374ceb8c7ff8a14d625c0b18912db89b90a5a7bf assets/cosmic_jewelry/models/item/sapphire_ore.json
 c2f1690b3f058ae3fb2e81535051baea8e2cb047 assets/cosmic_jewelry/models/item/sapphire_pillar.json
 6feaff1cca6d7ec20e1618ce57b3e0f49bf0bdea assets/cosmic_jewelry/models/item/sapphire_tiles.json
+3341ded1a5a7f0b00db7eae4bcb3f19e73bbb972 assets/cosmic_jewelry/models/item/white_essence.json

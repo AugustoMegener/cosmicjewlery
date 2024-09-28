@@ -14,4 +14,6 @@ class MaterialFluidTypeBase<M: Material<M>>(val material: M,
     private val clientExt = MaterialFluidTypeExt(material, textureName, materialSymbol)
 
     override fun initializeClient(consumer: Consumer<IClientFluidTypeExtensions>) { consumer.accept(clientExt) }
+
+
 }
