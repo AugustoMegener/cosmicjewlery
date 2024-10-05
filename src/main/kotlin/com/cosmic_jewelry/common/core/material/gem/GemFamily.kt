@@ -8,7 +8,7 @@ import com.cosmic_jewelry.common.core.feature.MaterialOre.Companion.MiningLevel.
 import com.cosmic_jewelry.common.datagen.OreGenProvider.commonOrePlacement
 import com.cosmic_jewelry.common.registry.BlockRegistry.deepslateGemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.gemOreBlock
-import com.cosmic_jewelry.common.util.ClassRegister
+import com.cosmic_jewelry.common.core.util.ClassRegister
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.level.levelgen.VerticalAnchor

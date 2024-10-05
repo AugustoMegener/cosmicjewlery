@@ -1,13 +1,13 @@
 {
   "values": [
-    "cosmic_jewelry:ruby_gem_block",
     "cosmic_jewelry:peridot_gem_block",
+    "cosmic_jewelry:ruby_gem_block",
     "cosmic_jewelry:sapphire_gem_block",
-    "cosmic_jewelry:ruby_tiles",
     "cosmic_jewelry:peridot_tiles",
+    "cosmic_jewelry:ruby_tiles",
     "cosmic_jewelry:sapphire_tiles",
-    "cosmic_jewelry:ruby_pillar",
     "cosmic_jewelry:peridot_pillar",
+    "cosmic_jewelry:ruby_pillar",
     "cosmic_jewelry:sapphire_pillar"
   ]
 }

@@ -1,6 +1,6 @@
 package com.cosmic_jewelry.common.datagen
 
-import com.cosmic_jewelry.common.core.feature.gem.GemRecipe
+import com.cosmic_jewelry.common.core.feature.MaterialRecipe
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
 import net.minecraft.data.recipes.RecipeOutput
@@ -11,6 +11,6 @@ class GemRecipeProvider(pOutput: PackOutput,
                         pRegistries: CompletableFuture<HolderLookup.Provider>) : RecipeProvider(pOutput, pRegistries)
 {
     override fun buildRecipes(pRecipeOutput: RecipeOutput) {
-        GemRecipe.register.flatMap { it.features } .forEach { it(pRecipeOutput) }
+        MaterialRecipe.register.flatMap { it.features } .forEach { it(pRecipeOutput) }
     }
 }

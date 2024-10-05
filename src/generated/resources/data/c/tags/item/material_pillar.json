@@ -1,13 +1,13 @@
 {
   "values": [
-    "cosmic_jewelry:orange_jasper_pillar",
-    "cosmic_jewelry:ruby_pillar",
-    "cosmic_jewelry:peridot_pillar",
     "cosmic_jewelry:lapis_lazuli_pillar",
-    "cosmic_jewelry:carnelian_pillar",
-    "cosmic_jewelry:amethyst_pillar",
-    "cosmic_jewelry:blue_quartz_pillar",
+    "cosmic_jewelry:peridot_pillar",
     "cosmic_jewelry:rose_quartz_pillar",
-    "cosmic_jewelry:sapphire_pillar"
+    "cosmic_jewelry:ruby_pillar",
+    "cosmic_jewelry:blue_quartz_pillar",
+    "cosmic_jewelry:amethyst_pillar",
+    "cosmic_jewelry:carnelian_pillar",
+    "cosmic_jewelry:sapphire_pillar",
+    "cosmic_jewelry:orange_jasper_pillar"
   ]
 }

@@ -2,6 +2,7 @@ package com.cosmic_jewelry.common.core.feature.essence
 
 import com.cosmic_jewelry.common.core.feature.MaterialFluidType
 import com.cosmic_jewelry.common.core.material.essence.Essence
+import com.cosmic_jewelry.common.core.util.ClassRegister
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.BucketItem
 import net.minecraft.world.item.Item
@@ -11,15 +12,20 @@ import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.material.FlowingFluid
 import net.minecraft.world.level.material.PushReaction
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions
 import net.neoforged.neoforge.fluids.BaseFlowingFluid
 import net.neoforged.neoforge.fluids.FluidType
 
 class EssenceFluidType(name : String,
                        override val featureBuilder : (Essence) -> FluidType,
+                       override val      clientExt : (Essence) -> IClientFluidTypeExtensions,
                        tags : List<TagKey<FluidType>> = listOf(),
-                       essenceSymbol : String = "#")
+                       essenceSymbol : String = "#",
+)
     : MaterialFluidType<Essence>(name, tags, essenceSymbol)
 {
+    init { all += this }
+
     override val sourceFluid = EssenceFlowingFluid(
         "${name}_source",
         { BaseFlowingFluid.Source(getFlowingFluidProperties(it)) },
@@ -44,5 +50,7 @@ class EssenceFluidType(name : String,
             .noLootTable()
             .liquid()
             .sound(SoundType.EMPTY))
-    })
+    }, essenceSymbol = essenceSymbol)
+
+    companion object : ClassRegister<EssenceFluidType>()
 }

@@ -1,7 +1,7 @@
 package com.cosmic_jewelry.common.core.feature
 
 import com.cosmic_jewelry.common.core.material.Material
-import com.cosmic_jewelry.common.util.ClassRegister
+import com.cosmic_jewelry.common.core.util.ClassRegister
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey

@@ -2,7 +2,7 @@ package com.cosmic_jewelry.common.core.feature
 
 import com.cosmic_jewelry.common.core.material.Material
 import com.cosmic_jewelry.common.core.material.Material.Companion.getTag
-import com.cosmic_jewelry.common.util.ClassRegister
+import com.cosmic_jewelry.common.core.util.ClassRegister
 import net.minecraft.core.Registry
 import net.minecraft.tags.TagKey
 import net.neoforged.neoforge.registries.DeferredRegister

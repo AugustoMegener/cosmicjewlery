@@ -2,7 +2,7 @@ package com.cosmic_jewelry.common.core.feature
 
 import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.Material
-import com.cosmic_jewelry.common.util.ClassRegister
+import com.cosmic_jewelry.common.core.util.ClassRegister
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation.parse
 import net.minecraft.tags.TagKey

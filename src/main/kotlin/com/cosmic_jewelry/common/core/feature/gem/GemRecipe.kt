@@ -7,7 +7,6 @@ import com.cosmic_jewelry.common.registry.BlockRegistry.pillarBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.tilesBlock
 import com.cosmic_jewelry.common.registry.ItemRegistry.cutGemItem
 import com.cosmic_jewelry.common.registry.ItemRegistry.rawGemItem
-import com.cosmic_jewelry.common.util.ClassRegister
 import com.cosmic_jewelry.common.world.item.crafting.LappingRecipe
 import com.cosmic_jewelry.common.world.item.crafting.LappingRecipeBuilder
 import net.minecraft.advancements.CriteriaTriggers
@@ -29,9 +28,7 @@ open class GemRecipe(name: String,
     constructor(name: String, builder: (GemType, ResourceLocation, RecipeOutput) -> Unit) :
             this(name, "#", builder)
 
-    init { all += this }
-
-    companion object : ClassRegister<GemRecipe>() {
+    companion object {
         val cutGemBlockRecipe = GemRecipe("#_cut_gems") { g, l, o ->
             ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cutGemBlock.item[g]!!)
                 .pattern("###")

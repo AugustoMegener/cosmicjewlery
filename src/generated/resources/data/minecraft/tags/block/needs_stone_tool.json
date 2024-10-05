@@ -1,22 +1,22 @@
 {
   "values": [
-    "cosmic_jewelry:orange_jasper_gem_block",
     "cosmic_jewelry:lapis_lazuli_gem_block",
-    "cosmic_jewelry:carnelian_gem_block",
-    "cosmic_jewelry:amethyst_gem_block",
-    "cosmic_jewelry:blue_quartz_gem_block",
     "cosmic_jewelry:rose_quartz_gem_block",
-    "cosmic_jewelry:orange_jasper_tiles",
+    "cosmic_jewelry:blue_quartz_gem_block",
+    "cosmic_jewelry:amethyst_gem_block",
+    "cosmic_jewelry:carnelian_gem_block",
+    "cosmic_jewelry:orange_jasper_gem_block",
     "cosmic_jewelry:lapis_lazuli_tiles",
-    "cosmic_jewelry:carnelian_tiles",
-    "cosmic_jewelry:amethyst_tiles",
-    "cosmic_jewelry:blue_quartz_tiles",
     "cosmic_jewelry:rose_quartz_tiles",
-    "cosmic_jewelry:orange_jasper_pillar",
+    "cosmic_jewelry:blue_quartz_tiles",
+    "cosmic_jewelry:amethyst_tiles",
+    "cosmic_jewelry:carnelian_tiles",
+    "cosmic_jewelry:orange_jasper_tiles",
     "cosmic_jewelry:lapis_lazuli_pillar",
-    "cosmic_jewelry:carnelian_pillar",
-    "cosmic_jewelry:amethyst_pillar",
+    "cosmic_jewelry:rose_quartz_pillar",
     "cosmic_jewelry:blue_quartz_pillar",
-    "cosmic_jewelry:rose_quartz_pillar"
+    "cosmic_jewelry:amethyst_pillar",
+    "cosmic_jewelry:carnelian_pillar",
+    "cosmic_jewelry:orange_jasper_pillar"
   ]
 }

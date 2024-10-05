@@ -2,7 +2,7 @@ package com.cosmic_jewelry.common.world.level.block.entity
 
 import com.cosmic_jewelry.common.registry.BlockEntityTypeRegistry.buriedGemBlockEntityType
 import com.cosmic_jewelry.common.registry.ItemRegistry.cutGemTag
-import com.cosmic_jewelry.common.util.NeoForgeUtil.get
+import com.cosmic_jewelry.common.util.get
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
@@ -53,6 +53,4 @@ class BuriedGemBlockEntity(pPos: BlockPos, pBlockState: BlockState)
       gemFacing = Direction.valueOf(pTag.getString("facing"))
 
       super.loadAdditional(pTag, pRegistries) }
-
-
 }

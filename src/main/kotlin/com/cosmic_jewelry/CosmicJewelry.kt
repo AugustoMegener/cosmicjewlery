@@ -1,10 +1,14 @@
 package com.cosmic_jewelry
 
+import com.cosmic_jewelry.common.core.feature.essence.EssenceRecipe.Companion.fillEssenceContainersRecipe
 import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.cutGemBlockRecipe
 import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemLappingRecipe
 import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemPillarBlockRecipe
 import com.cosmic_jewelry.common.core.feature.gem.GemRecipe.Companion.gemTilesBlockRecipe
+import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.blueEssence
+import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.pinkEssence
 import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.whiteEssence
+import com.cosmic_jewelry.common.core.material.essence.Essence.Companion.yellowEssence
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.amethystGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.blueQuartzGem
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.carnelianGem
@@ -22,6 +26,7 @@ import com.cosmic_jewelry.common.registry.BlockRegistry.deepslateGemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.gemOreBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.pillarBlock
 import com.cosmic_jewelry.common.registry.BlockRegistry.tilesBlock
+import com.cosmic_jewelry.common.registry.DataComponentTypeRegistry.dataComponentTypes
 import com.cosmic_jewelry.common.registry.FluidRegistry.fluids
 import com.cosmic_jewelry.common.registry.FluidTypeRegistry.essenceFluidType
 import com.cosmic_jewelry.common.registry.FluidTypeRegistry.fluidTypes
@@ -49,7 +54,7 @@ object CosmicJewelry {
 
     init {
         registerMaterial()
-        listOf(blocks, items, tabs, blockEntityTypes, menuTypes, recipeTypes, recipeSerializers,
+        listOf(blocks, items, tabs, blockEntityTypes, menuTypes, recipeTypes, recipeSerializers, dataComponentTypes,
                biomeModifierSerializers, fluids, fluidTypes)
             .forEach { it.register(MOD_BUS) }
     }
@@ -86,14 +91,15 @@ object CosmicJewelry {
                 feature(gemLappingRecipe)
             }
 
-            addMaterial( "white_essence" to whiteEssence,
-                        /*"yellow_essence" to yellowEssence,
-                          "blue_essence" to blueEssence,
-                          "pink_essence" to pinkEssence*/   )
+            addMaterial( "white_essence" to  whiteEssence,
+                        "yellow_essence" to yellowEssence,
+                          "blue_essence" to   blueEssence,
+                          "pink_essence" to   pinkEssence   )
             {
                 fluidTypeFeature(fluidTypes, fluids, blocks, items,
                     essenceFluidType)
                 feature(items, essenceJarItem)
+                feature(fillEssenceContainersRecipe)
             }
         }
     }

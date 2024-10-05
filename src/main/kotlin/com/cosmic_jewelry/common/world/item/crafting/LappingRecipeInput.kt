@@ -1,6 +1,7 @@
 package com.cosmic_jewelry.common.world.item.crafting
 
-import com.cosmic_jewelry.common.util.NeoForgeUtil.get
+
+import com.cosmic_jewelry.common.util.get
 import net.minecraft.world.item.crafting.RecipeInput
 import net.neoforged.neoforge.items.IItemHandler
 

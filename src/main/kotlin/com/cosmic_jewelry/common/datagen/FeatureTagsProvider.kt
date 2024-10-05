@@ -1,7 +1,7 @@
 package com.cosmic_jewelry.common.datagen
 
 import com.cosmic_jewelry.common.core.feature.RegistrableMaterialFeature
-import com.cosmic_jewelry.common.util.ClassRegister
+import com.cosmic_jewelry.common.core.util.ClassRegister
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.Registry
 import net.minecraft.data.PackOutput
@@ -20,7 +20,8 @@ class FeatureTagsProvider<T, F: RegistrableMaterialFeature<*, T>>(id:
                                                                   val registry:
                                                                     Registry<T>,
                                                                   val featureRegistry:
-                                                                    ClassRegister<F>)
+                                                                  ClassRegister<F>
+)
     : TagsProvider<T>(packOutput, registry.key(), registries, id, existingFileHelper)
 {
     override fun addTags(pProvider: HolderLookup.Provider) {
