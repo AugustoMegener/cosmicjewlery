@@ -4,11 +4,12 @@ import com.cosmic_jewelry.common.core.material.Material
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.resources.ResourceLocation.parse as loc
 
-abstract class MaterialFeatureBase<M : Material<M>, C, F>(val name            : String,
+abstract class MaterialFeatureBase<M : Material<M>, C, F>(val id              : ResourceLocation,
                                                           val materialSymbol  : String = "#") {
 
-    val genericName = name.replace(materialSymbol, "material")
-    val genericPath = loc("c:${genericName}")
+    val name = id.path
+
+    val universalId = loc("${id.namespace}:${id.path.replace(materialSymbol, "material")}")
 
     protected val registerMap = HashMap<M, () -> F>()
 
@@ -35,6 +36,6 @@ abstract class MaterialFeatureBase<M : Material<M>, C, F>(val name            : 
     @Suppress("UNCHECKED_CAST")
     fun createPathUnsafe(material: Material<*>) = createPath(material as M)
 
-
-    fun createOwnedGenericPathUnsafe(id: String) = loc("$id:$genericName")
+    fun getGenericName(material: Material<*>) = name.replace(materialSymbol, material.id.path)
+    fun getGenericPath(material: Material<*>) = loc("${material.id.namespace}:${getGenericName(material)}")
 }

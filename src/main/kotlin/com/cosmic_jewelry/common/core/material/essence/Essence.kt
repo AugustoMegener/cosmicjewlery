@@ -1,5 +1,6 @@
 package com.cosmic_jewelry.common.core.material.essence
 
+import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.Material
 import com.cosmic_jewelry.common.core.material.gem.GemType
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.blueDiamondGem
@@ -8,8 +9,9 @@ import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.whiteDiamon
 import com.cosmic_jewelry.common.core.material.gem.GemType.Companion.yellowDiamondGem
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Rarity
+import net.minecraft.resources.ResourceLocation.parse as loc
 
-sealed class Essence : Material<Essence> {
+sealed class Essence : Material<Essence>(loc("$ID:essence")) {
 
     override val location get() = essences.entries.find { it.value == this }!!.key
 
@@ -21,9 +23,12 @@ sealed class Essence : Material<Essence> {
                override val      color : Int,
                override val     rarity : Rarity = Rarity.COMMON)
         : Essence(), IEssence
-    { override val type = this }
+    {
+        override val type = this
+    }
 
     data object Composed : Essence() {
+
         override val rarity = Rarity.COMMON
 
         class ComposedEssence(val composition: List<Pair<Float, Base>>) : IEssence {

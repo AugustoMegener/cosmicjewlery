@@ -1,33 +1,31 @@
 package com.cosmic_jewelry.common.core.material
 
-import net.minecraft.core.Registry
+import com.cosmic_jewelry.common.core.util.UniversalTag
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Rarity
-import net.minecraft.resources.ResourceLocation.parse as loc
+import kotlin.reflect.KClass
 
-interface Material<T: Material<T>> {
+abstract class Material<T: Material<T>>(val id: ResourceLocation) {
 
-    val location: ResourceLocation
+    init { materials[id] = this::class }
+
+    open val tags = listOf<UniversalTag>()
+
+    abstract val location: ResourceLocation
 
     val  name : String get() = location.path
     val owner : String get() = location.namespace
 
-    val rarity: Rarity
+    abstract val rarity: Rarity
 
-    val mohs: Float
+    abstract val mohs: Float
 
-
-    val registry: HashMap<ResourceLocation, T>
+    abstract val registry: HashMap<ResourceLocation, T>
 
     companion object {
-        val tags = HashMap<Material<*>, HashMap<Registry<*>, TagKey<*>>>()
+        private val materials = HashMap<ResourceLocation, KClass<out Material<*>>>()
 
-        // generic typing insanity moments
-        @Suppress("UNCHECKED_CAST")
-        fun <T, M: Material<M>> Material<M>.getTag(registry: Registry<T>): TagKey<T> =
-            tags.computeIfAbsent(this) { HashMap() }
-                .computeIfAbsent(registry) { TagKey.create(registry.key(), loc("$owner:${name}_material")) }
-                    as TagKey<T>
+        fun byId(id: ResourceLocation) = materials[id]
+
     }
 }

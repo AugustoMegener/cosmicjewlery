@@ -3,7 +3,7 @@ package com.cosmic_jewelry.common.core.feature.essence
 import com.cosmic_jewelry.common.core.feature.MaterialFluidType
 import com.cosmic_jewelry.common.core.material.essence.Essence
 import com.cosmic_jewelry.common.core.util.ClassRegister
-import net.minecraft.tags.TagKey
+import com.cosmic_jewelry.common.core.util.UniversalTag
 import net.minecraft.world.item.BucketItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items.BUCKET
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.fluids.FluidType
 class EssenceFluidType(name : String,
                        override val featureBuilder : (Essence) -> FluidType,
                        override val      clientExt : (Essence) -> IClientFluidTypeExtensions,
-                       tags : List<TagKey<FluidType>> = listOf(),
+                       tags : List<UniversalTag> = listOf(),
                        essenceSymbol : String = "#",
 )
     : MaterialFluidType<Essence>(name, tags, essenceSymbol)

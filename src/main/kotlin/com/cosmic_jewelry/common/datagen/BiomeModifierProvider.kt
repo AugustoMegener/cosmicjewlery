@@ -1,6 +1,5 @@
 package com.cosmic_jewelry.common.datagen
 
-import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.feature.MaterialOre
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
@@ -11,7 +10,7 @@ object BiomeModifierProvider {
 
     fun bootstrap(ctx: BootstrapContext<BiomeModifier>) {
         MaterialOre.register.forEach { o ->
-            ctx.register(ResourceKey.create(BIOME_MODIFIERS, o.createOwnedGenericPathUnsafe(ID)), o.biomeModifier)
+            ctx.register(ResourceKey.create(BIOME_MODIFIERS, o.genericPath), o.biomeModifier)
         }
     }
 }

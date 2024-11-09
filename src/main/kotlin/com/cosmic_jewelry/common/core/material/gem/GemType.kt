@@ -1,5 +1,6 @@
 package com.cosmic_jewelry.common.core.material.gem
 
+import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.Material
 import com.cosmic_jewelry.common.core.material.gem.GemFamily.Companion.corundumFamily
 import com.cosmic_jewelry.common.core.material.gem.GemFamily.Companion.diamondFamily
@@ -10,10 +11,12 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Rarity
+import net.minecraft.resources.ResourceLocation.parse as loc
 
 class GemType internal constructor(val family: GemFamily, override val mohs: Float, override val rarity: Rarity)
-    : Material<GemType>
+    : Material<GemType>(loc("$ID:gem"))
 {
+
     override val location get() = gemTypes.entries.find { it.value == this }!!.key
 
     override val registry = gemTypes

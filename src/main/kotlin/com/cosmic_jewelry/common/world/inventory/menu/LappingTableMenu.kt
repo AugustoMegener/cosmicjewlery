@@ -74,7 +74,7 @@ class LappingTableMenu(containerId: Int, playerInventory: Inventory, val blockEn
         val (start, end) = when (index) {
             in 0..1 -> 2 to 4
             in 2..3 -> 0 to 2
-            else -> 0 to 4
+            else    -> 0 to 4
         }
 
         if (!moveItemStackTo(sourceStack, start, end, false)) return ItemStack.EMPTY

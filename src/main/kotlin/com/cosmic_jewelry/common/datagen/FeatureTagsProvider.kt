@@ -25,7 +25,8 @@ class FeatureTagsProvider<T, F: RegistrableMaterialFeature<*, T>>(id:
     : TagsProvider<T>(packOutput, registry.key(), registries, id, existingFileHelper)
 {
     override fun addTags(pProvider: HolderLookup.Provider) {
-        featureRegistry.register.forEach { o -> o.content.map { it.key to it.value } .forEach { (m, b) ->
-            o.getTags(m).forEach { tag(it).add(registry.getResourceKey(b!!).get()) } } }
+        featureRegistry.register
+            .forEach { o -> o.content.forEach { (m, b) ->
+            o.getTags(m).forEach { tag(it.by(o.registry.key())).add(registry.getResourceKey(b!!).get()) } } }
     }
 }

@@ -1,12 +1,12 @@
 package com.cosmic_jewelry.common.core.feature
 
+import com.cosmic_jewelry.CosmicJewelry.ID
 import com.cosmic_jewelry.common.core.material.Material
 import com.cosmic_jewelry.common.core.util.ClassRegister
+import com.cosmic_jewelry.common.core.util.UniversalTag
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
-import net.minecraft.tags.BlockTags
-import net.minecraft.tags.TagKey
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DropExperienceBlock
@@ -18,9 +18,10 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider
 import net.neoforged.neoforge.common.world.BiomeModifier
 import net.neoforged.neoforge.registries.DeferredRegister
+import net.minecraft.resources.ResourceLocation.parse as loc
 
-abstract class MaterialOre<M: Material<M>>(name: String, tags: List<TagKey<Block>> = listOf(), gemSymbol: String = "#")
-    : MaterialBlock<M>(name,tags, gemSymbol), DataGenFeature<BlockStateProvider, M, Block>
+abstract class MaterialOre<M: Material<M>>(name: String, tags: List<UniversalTag> = listOf(), gemSymbol: String = "#")
+    : MaterialBlock<M>(name, tags, gemSymbol), DataGenFeature<BlockStateProvider, M, Block>
 {
     abstract val miningTime: (Float) -> Float
 
@@ -62,13 +63,16 @@ abstract class MaterialOre<M: Material<M>>(name: String, tags: List<TagKey<Block
     @Suppress("UNCHECKED_CAST") fun getConfigUnsafe(material: Material<*>) = getConfig(material as M)
     @Suppress("UNCHECKED_CAST") fun getPlacementsUnsafe(material: Material<*>) = getPlacements(material as M)
 
+    override fun <T : M> getMaterialTags(material: T) = listOf(UniversalTag(loc("$ID:${material.id.path}_ore")))
+
     companion object : ClassRegister<MaterialOre<*>>() {
 
-        @JvmInline value class MiningLevel(val tag: TagKey<Block>) {
+        @JvmInline
+        value class MiningLevel(val tag: UniversalTag) {
             companion object {
-                val stoneLevel = MiningLevel(BlockTags.NEEDS_STONE_TOOL)
-                val ironLevel = MiningLevel(BlockTags.NEEDS_IRON_TOOL)
-                val diamondLevel = MiningLevel(BlockTags.NEEDS_DIAMOND_TOOL)
+                val stoneLevel   = MiningLevel(UniversalTag(loc("needs_stone_tool"  )))
+                val ironLevel    = MiningLevel(UniversalTag(loc("needs_iron_tool"   )))
+                val diamondLevel = MiningLevel(UniversalTag(loc("needs_diamond_tool")))
             }
         }
     }
